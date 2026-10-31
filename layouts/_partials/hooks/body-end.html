@@ -1,0 +1,12 @@
+<script>
+(function () {
+  var slides = document.querySelectorAll('.td-hero-slide');
+  if (slides.length < 2) return;
+  var current = 0;
+  setInterval(function () {
+    slides[current].classList.remove('td-hero-slide--active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('td-hero-slide--active');
+  }, 4000);
+}());
+</script>

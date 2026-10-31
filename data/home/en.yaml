@@ -1,15 +1,21 @@
 sections: [hero, cards, cta]
 
 hero:
-  align: center
-  eyebrow: Self-hosted comic & ebook library
+  align: start
   title_lines:
-    - words: [{ text: Your collection. }]
-    - words: [{ text: Your server. }]
-  lead: Stashix is a self-hosted library server for comics, manga, and ebooks. Built with Elixir and Phoenix LiveView.
+    - "Ready to start your"
+    - "next reading binge?"
+  lead: Self-hosted comic book and ebook library. CBZ, CBR, CB7, PDF and EPUB — in-browser readers, full-text search, and folder watching. Your collection, your server.
   actions:
     - { label: Get started, url: docs/get-started/, icon: fa-solid fa-rocket, style: primary }
-    - { label: Read the docs, url: docs/, icon: fa-solid fa-book, style: ghost }
+    - { label: View on GitHub, url: "https://github.com/aroy-art/stashix", icon: fa-brands fa-github, style: ghost, external: true }
+  slideshow:
+    - images/hero-screenshot.svg
+    # Add more screenshots here — one per Stashix feature/screen
+  media:
+    ratio: 1fr 1fr
+    hide_below: lg
+    max_width: 560px
 
 cards:
   eyebrow: Everything you need
