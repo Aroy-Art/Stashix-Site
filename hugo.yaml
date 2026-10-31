@@ -39,7 +39,7 @@ params:
   footer_center_info: ''
   ui:
     preset: ink
-    preset_menu: []
+    preset_menu: [ink]
     dark_mode: true
     section_index: cards
     blog_index: cards
@@ -52,7 +52,7 @@ params:
   github_branch: main
 
   logo: icons/logo.svg
-  # wordmark: icons/wordmark.svg
+  wordmark: icons/wordmark.svg
 
 module:
   imports:

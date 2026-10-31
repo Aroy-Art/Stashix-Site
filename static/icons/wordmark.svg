@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 200 46" width="200" height="46">
+  <defs>
+    <style>
+      /* "Stash" adapts to system color scheme.
+         Note: prefers-color-scheme responds to OS setting, not oink's manual toggle.
+         Users who override via the site toggle see a best-effort fallback. */
+      .stash-main { fill: oklch(13% 0.028 261.692); }       /* gray-950 on light */
+      .stash-shadow { fill: oklch(49.1% 0.27 292.581 / 0.45); } /* violet-700 dim on light */
+      @media (prefers-color-scheme: dark) {
+        .stash-main   { fill: #ffffff; }
+        .stash-shadow { fill: oklch(49.1% 0.27 292.581); }
+      }
+    </style>
+    <filter id="glow" x="-0.19" y="-0.24" width="1.38" height="1.48">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <filter id="trail-glow" x="-0.16" y="-0.68" width="1.31" height="2.36">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <linearGradient id="trail" x1="0" y1="0" x2="50" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%"   stop-color="#a78bfa" stop-opacity="0.85"/>
+      <stop offset="60%"  stop-color="#a78bfa" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#a78bfa" stop-opacity="0"/>
+    </linearGradient>
+    <clipPath id="dot">
+      <rect x="94" y="0" width="10" height="20"/>
+    </clipPath>
+  </defs>
+
+  <!-- Drop shadow: violet-700 offset -->
+  <text x="3.76" y="39.76"
+    class="stash-shadow"
+    font-family="'Big Shoulders Display', Impact, sans-serif"
+    font-weight="900" font-size="32" aria-hidden="true">StashiX</text>
+
+  <!-- "Stash" — adapts light/dark via CSS -->
+  <text x="2" y="38"
+    class="stash-main"
+    font-family="'Big Shoulders Display', Impact, sans-serif"
+    font-weight="900" font-size="32">Stash</text>
+
+  <!-- "iX" in violet with glow — readable on both backgrounds -->
+  <text x="93.1" y="38"
+    font-family="'Big Shoulders Display', Impact, sans-serif"
+    font-weight="900" font-size="32"
+    fill="oklch(54.1% 0.281 293.009)"
+    filter="url(#glow)">iX</text>
+
+  <!-- Aqua dot: same "i" clipped to top -->
+  <text x="93.1" y="38"
+    font-family="'Big Shoulders Display', Impact, sans-serif"
+    font-weight="900" font-size="32"
+    fill="oklch(87% 0.13 195)"
+    clip-path="url(#dot)">i</text>
+
+  <!-- Trail: sweeps from X up-right -->
+  <g transform="matrix(1.34,0,0,1.33,131,19)">
+    <path d="M 1,13 C 16,13 36,11 49,2"
+      fill="none" stroke="url(#trail)" stroke-width="3"
+      stroke-linecap="round" filter="url(#trail-glow)"/>
+    <path d="M 1,13 C 14,13 30,11 44,5"
+      fill="none" stroke="url(#trail)" stroke-width="1.2"
+      stroke-linecap="round" opacity="0.8"/>
+  </g>
+</svg>
