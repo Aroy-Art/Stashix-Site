@@ -1,3 +1,0 @@
-# Reference
-
-Documentation coming soon.

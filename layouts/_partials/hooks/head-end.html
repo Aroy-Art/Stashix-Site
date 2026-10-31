@@ -1,0 +1,2 @@
+{{- $css := resources.Get "css/stashix.css" | minify -}}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">

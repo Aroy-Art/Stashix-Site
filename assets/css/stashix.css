@@ -1,0 +1,78 @@
+/*
+ * Stashix color overrides for the oink ink preset.
+ * Replaces the ink preset's red accent with Stashix violet (#7c3aed),
+ * sets the light canvas to warm cream (matching the app's newsprint theme),
+ * and tints the dark canvas to match the app's gray-950 blue-black.
+ */
+
+/* ── Light (ink preset) ─────────────────────────────────────────────────── */
+[data-td-preset='ink'] {
+  /* Warm cream canvas — matches app's light oklch(0.955 0.018 85) */
+  --bs-body-bg:            #f0ebe0;
+  --bs-body-bg-rgb:        240, 235, 224;
+  --bs-secondary-bg:       #f7f3eb;
+  --bs-secondary-bg-rgb:   247, 243, 235;
+  --bs-tertiary-bg:        #f0ebe0;
+  --bs-tertiary-bg-rgb:    240, 235, 224;
+
+  /* Violet accent — replaces the ink preset's red */
+  --td-brand-copper:       #7c3aed;
+  --td-brand-copper-dim:   rgba(124, 58, 237, 0.45);
+  --td-preset-accent:      #7c3aed;
+  --td-preset-accent-rgb:  124, 58, 237;
+  --td-preset-accent-hover:#6d28d9;
+  --bs-link-hover-color:   #6d28d9;
+  --bs-link-hover-color-rgb: 109, 40, 217;
+  --td-on-link:            #ffffff;
+
+  /* Code blocks on warm paper */
+  --td-pre-bg:             #e8e2d6;
+  --td-code-header-bg:     #e0dace;
+  --td-code-inline-bg:     rgba(9, 9, 15, 0.06);
+}
+
+/* ── Dark (ink preset) ──────────────────────────────────────────────────── */
+[data-td-preset='ink'][data-bs-theme='dark'],
+[data-td-preset='ink'] [data-bs-theme='dark'] {
+  /* Blue-black canvas — matches app's gray-950 */
+  --bs-body-bg:            #0d0d16;
+  --bs-body-bg-rgb:        13, 13, 22;
+  --bs-secondary-bg:       #141421;
+  --bs-secondary-bg-rgb:   20, 20, 33;
+  --bs-tertiary-bg:        #141421;
+  --bs-tertiary-bg-rgb:    20, 20, 33;
+
+  /* Violet-300 accent for readability on dark */
+  --td-brand-copper:       #a78bfa;
+  --td-brand-copper-dim:   rgba(167, 139, 250, 0.45);
+  --td-preset-accent:      #a78bfa;
+  --td-preset-accent-rgb:  167, 139, 250;
+  --td-preset-accent-hover:#c4b5fd;
+  --bs-link-hover-color:   #c4b5fd;
+  --bs-link-hover-color-rgb: 196, 181, 253;
+  --td-on-link:            #0d0d16;
+
+  /* Code blocks on dark canvas */
+  --td-pre-bg:             #0a0a12;
+  --td-code-header-bg:     #1a1a28;
+  --td-code-inline-bg:     rgba(237, 237, 237, 0.07);
+
+  /* Cyan pop shadow on dark — matches app's --color-pop */
+  --td-brand-header-bg:    rgba(13, 13, 22, 0.98);
+}
+
+/* ── Landing page buttons ── */
+/* The ink landing overrides --td-primary-bg to --td-brand-copper,
+   so violet flows through automatically. Confirm the on-link color. */
+[data-td-preset='ink'] .td-landing-landing {
+  --td-primary-bg:       #7c3aed;
+  --td-primary-bg-hover: #6d28d9;
+  --td-primary-fg:       #ffffff;
+}
+
+[data-td-preset='ink'][data-bs-theme='dark'] .td-landing-landing,
+[data-td-preset='ink'] [data-bs-theme='dark'] .td-landing-landing {
+  --td-primary-bg:       #7c3aed;
+  --td-primary-bg-hover: #a78bfa;
+  --td-primary-fg:       #ffffff;
+}

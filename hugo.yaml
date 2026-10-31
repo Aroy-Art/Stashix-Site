@@ -1,0 +1,62 @@
+title: &siteTitle Stashix
+baseURL: https://stashix.org/
+defaultContentLanguage: en
+enableGitInfo: false
+enableRobotsTXT: true
+enableEmoji: true
+timeZone: UTC
+
+languages:
+  en:
+    label: English
+    locale: en-US
+    weight: 1
+    title: *siteTitle
+    params:
+      description: Self-hosted comic book and ebook library. Documentation, guides, and release notes.
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    parser:
+      attribute:
+        block: true
+      wrapStandAloneImageWithinParagraph: false
+  highlight:
+    noClasses: false
+
+outputs:
+  home: [HTML, RSS, markdown, LLMS]
+  page: [HTML, markdown]
+  section: [HTML, RSS, print, markdown]
+
+params:
+  offline_search: true
+  copyright:
+    authors: Stashix contributors
+    from_year: 2024
+  footer_center_info: ''
+  ui:
+    preset: ink
+    preset_menu: []
+    dark_mode: true
+    section_index: cards
+    blog_index: cards
+    sidebar_menu_foldable: true
+    sidebar_icon_policy: groups
+    backlinks: true
+    theme_color: '#7c3aed'
+
+  github_repo: https://github.com/aroy-art/stashix
+  github_branch: main
+
+  logo: icons/logo.svg
+  # wordmark: icons/wordmark.svg
+
+module:
+  imports:
+    - path: github.com/pgsty/oink
+  hugoVersion:
+    extended: true
+    min: 0.166.0
