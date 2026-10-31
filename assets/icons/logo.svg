@@ -1,5 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Project logo">
-  <rect width="64" height="64" rx="14" fill="#245f94"/>
-  <path d="M18 17h20l8 8v22H18z" fill="none" stroke="#fff" stroke-width="4" stroke-linejoin="round"/>
-  <path d="M38 17v10h8M27 32l-5 5 5 5M37 32l5 5-5 5" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32">
+  <defs>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="dot-clip">
+      <rect x="0" y="0" width="32" height="14"/>
+    </clipPath>
+  </defs>
+  <!-- Rounded square background: violet-600 -->
+  <rect width="32" height="32" rx="7" fill="oklch(54.1% 0.281 293.009)"/>
+  <!-- "S" glyph in white, Big Shoulders Display style approximated -->
+  <text x="16" y="25"
+    font-family="'Big Shoulders Display', Impact, sans-serif"
+    font-weight="900"
+    font-size="26"
+    fill="#ffffff"
+    text-anchor="middle"
+    dominant-baseline="auto">S</text>
+  <!-- Aqua dot in top-right corner -->
+  <circle cx="25" cy="7" r="3.5" fill="oklch(87% 0.13 195)" filter="url(#glow)" opacity="0.9"/>
 </svg>
