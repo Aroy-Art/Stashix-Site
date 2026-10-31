@@ -136,13 +136,10 @@
   transform: translate(-2px, -2px);
 }
 
-/* ── Navbar logo lockup ──────────────────────────────────────────────────── */
-/* The wordmark already contains the full name; hide the redundant icon mark. */
-.td-nav-logo {
-  display: none !important;
-}
-/* Increase from oink's default 16px to something legible in the nav. */
-.td-nav-wordmark {
-  height: 22px !important;
-  width: auto !important;
+/* ── Navbar wordmark (inline SVG) ────────────────────────────────────────── */
+/* Sizing to match oink's nav-brand lockup height. */
+.td-stashix-wordmark {
+  display: block;
+  height: 22px;
+  width: auto;
 }

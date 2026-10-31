@@ -52,7 +52,6 @@ params:
   github_branch: main
 
   logo: icons/logo.svg
-  wordmark: icons/wordmark.svg
 
 module:
   imports:
