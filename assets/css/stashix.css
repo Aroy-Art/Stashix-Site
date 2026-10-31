@@ -1,78 +1,137 @@
 /*
  * Stashix color overrides for the oink ink preset.
- * Replaces the ink preset's red accent with Stashix violet (#7c3aed),
- * sets the light canvas to warm cream (matching the app's newsprint theme),
- * and tints the dark canvas to match the app's gray-950 blue-black.
+ * All values verbatim from stashix_web/priv/static/assets/app.css.
+ *
+ * Dark tokens:
+ *   gray-950 oklch(13% 0.028 261.692)   — canvas
+ *   gray-900 oklch(21% 0.034 264.665)   — surface
+ *   gray-800 oklch(27.8% 0.033 256.848) — raised
+ *   gray-700 oklch(37.3% 0.034 259.733) — strong line
+ *   gray-400 oklch(70.7% 0.022 261.325) — muted text
+ *   gray-300 oklch(87.2% 0.01 258.338)  — soft text
+ *   violet-600 oklch(54.1% 0.281 293.009) — primary action
+ *   violet-300 oklch(81.1% 0.111 293.571) — accent on dark
+ *   pop/ink oklch(87% 0.13 195)          — cyan highlight
+ *
+ * Light tokens:
+ *   canvas  oklch(95.5% 0.018 85)  — warm cream
+ *   surface oklch(98.5% 0.008 85)
+ *   raised  oklch(92% 0.024 85)
+ *   violet-700 oklch(49.1% 0.27 292.581) — action on light
  */
 
-/* ── Light (ink preset) ─────────────────────────────────────────────────── */
+/* ── Light ───────────────────────────────────────────────────────────────── */
 [data-td-preset='ink'] {
-  /* Warm cream canvas — matches app's light oklch(0.955 0.018 85) */
-  --bs-body-bg:            #f0ebe0;
-  --bs-body-bg-rgb:        240, 235, 224;
-  --bs-secondary-bg:       #f7f3eb;
-  --bs-secondary-bg-rgb:   247, 243, 235;
-  --bs-tertiary-bg:        #f0ebe0;
-  --bs-tertiary-bg-rgb:    240, 235, 224;
+  --bs-body-bg:        oklch(95.5% 0.018 85);
+  --bs-secondary-bg:   oklch(98.5% 0.008 85);
+  --bs-tertiary-bg:    oklch(92% 0.024 85);
 
-  /* Violet accent — replaces the ink preset's red */
-  --td-brand-copper:       #7c3aed;
-  --td-brand-copper-dim:   rgba(124, 58, 237, 0.45);
-  --td-preset-accent:      #7c3aed;
-  --td-preset-accent-rgb:  124, 58, 237;
-  --td-preset-accent-hover:#6d28d9;
-  --bs-link-hover-color:   #6d28d9;
+  --bs-body-color:     oklch(13% 0.028 261.692);
+  --bs-emphasis-color: oklch(13% 0.028 261.692);
+  --bs-secondary-color: oklch(37.3% 0.034 259.733);
+  --bs-tertiary-color:  oklch(44.6% 0.03 256.802);
+
+  --bs-link-color:           oklch(13% 0.028 261.692);
+  --bs-link-hover-color:     oklch(49.1% 0.27 292.581);
   --bs-link-hover-color-rgb: 109, 40, 217;
-  --td-on-link:            #ffffff;
 
-  /* Code blocks on warm paper */
-  --td-pre-bg:             #e8e2d6;
-  --td-code-header-bg:     #e0dace;
-  --td-code-inline-bg:     rgba(9, 9, 15, 0.06);
+  --bs-border-color:             oklch(13% 0.028 261.692 / 0.24);
+  --bs-border-color-translucent: oklch(13% 0.028 261.692 / 0.24);
+  --td-hairline:                 oklch(13% 0.028 261.692 / 0.24);
+  --td-brand-line-strong:        oklch(13% 0.028 261.692 / 0.55);
+
+  --td-preset-accent:       oklch(49.1% 0.27 292.581);
+  --td-preset-accent-rgb:   109, 40, 217;
+  --td-preset-accent-hover: oklch(54.1% 0.281 293.009);
+  --td-brand-copper:        oklch(49.1% 0.27 292.581);
+  --td-brand-copper-dim:    oklch(49.1% 0.27 292.581 / 0.45);
+  --td-on-link:             #ffffff;
+
+  --td-brand-header-bg: oklch(95.5% 0.018 85 / 0.98);
+  --td-brand-elev:      oklch(98.5% 0.008 85);
+  --td-brand-silk:      oklch(44.6% 0.03 256.802);
+
+  --td-pre-bg:         oklch(92% 0.024 85);
+  --td-code-header-bg: oklch(92% 0.024 85);
+  --td-code-inline-bg: oklch(13% 0.028 261.692 / 0.06);
+  --bs-code-color:     oklch(13% 0.028 261.692);
 }
 
-/* ── Dark (ink preset) ──────────────────────────────────────────────────── */
+/* ── Dark ────────────────────────────────────────────────────────────────── */
 [data-td-preset='ink'][data-bs-theme='dark'],
 [data-td-preset='ink'] [data-bs-theme='dark'] {
-  /* Blue-black canvas — matches app's gray-950 */
-  --bs-body-bg:            #0d0d16;
-  --bs-body-bg-rgb:        13, 13, 22;
-  --bs-secondary-bg:       #141421;
-  --bs-secondary-bg-rgb:   20, 20, 33;
-  --bs-tertiary-bg:        #141421;
-  --bs-tertiary-bg-rgb:    20, 20, 33;
+  --bs-body-bg:          oklch(13% 0.028 261.692);
+  --bs-body-bg-rgb:      12, 13, 22;
+  --bs-secondary-bg:     oklch(21% 0.034 264.665);
+  --bs-secondary-bg-rgb: 17, 22, 38;
+  --bs-tertiary-bg:      oklch(27.8% 0.033 256.848);
+  --bs-tertiary-bg-rgb:  27, 35, 54;
 
-  /* Violet-300 accent for readability on dark */
-  --td-brand-copper:       #a78bfa;
-  --td-brand-copper-dim:   rgba(167, 139, 250, 0.45);
-  --td-preset-accent:      #a78bfa;
-  --td-preset-accent-rgb:  167, 139, 250;
-  --td-preset-accent-hover:#c4b5fd;
-  --bs-link-hover-color:   #c4b5fd;
+  --bs-body-color:          #ffffff;
+  --bs-body-color-rgb:      255, 255, 255;
+  --bs-emphasis-color:      #ffffff;
+  --bs-emphasis-color-rgb:  255, 255, 255;
+  --bs-secondary-color:     oklch(87.2% 0.01 258.338);
+  --bs-tertiary-color:      oklch(70.7% 0.022 261.325);
+
+  --bs-link-color:           oklch(87.2% 0.01 258.338);
+  --bs-link-hover-color:     oklch(81.1% 0.111 293.571);
   --bs-link-hover-color-rgb: 196, 181, 253;
-  --td-on-link:            #0d0d16;
 
-  /* Code blocks on dark canvas */
-  --td-pre-bg:             #0a0a12;
-  --td-code-header-bg:     #1a1a28;
-  --td-code-inline-bg:     rgba(237, 237, 237, 0.07);
+  --bs-border-color:             rgb(255 255 255 / 0.12);
+  --bs-border-color-translucent: rgb(255 255 255 / 0.12);
+  --td-hairline:                 rgb(255 255 255 / 0.12);
+  --td-brand-line-strong:        oklch(37.3% 0.034 259.733);
 
-  /* Cyan pop shadow on dark — matches app's --color-pop */
-  --td-brand-header-bg:    rgba(13, 13, 22, 0.98);
+  --td-preset-accent:          oklch(54.1% 0.281 293.009);
+  --td-preset-accent-rgb:      124, 58, 237;
+  --td-preset-accent-hover:    oklch(81.1% 0.111 293.571);
+  --td-brand-copper:           oklch(54.1% 0.281 293.009);
+  --td-brand-copper-dim:       oklch(54.1% 0.281 293.009 / 0.45);
+  --td-on-link:                oklch(13% 0.028 261.692);
+
+  --td-brand-header-bg: oklch(13% 0.028 261.692 / 0.98);
+  --td-brand-elev:      oklch(21% 0.034 264.665);
+  --td-brand-silk:      oklch(70.7% 0.022 261.325);
+
+  --td-pre-bg:           oklch(10% 0.025 261.692);
+  --td-code-header-bg:   oklch(21% 0.034 264.665);
+  --td-code-inline-bg:   rgb(255 255 255 / 0.07);
+  --bs-code-color:       #ffffff;
 }
 
-/* ── Landing page buttons ── */
-/* The ink landing overrides --td-primary-bg to --td-brand-copper,
-   so violet flows through automatically. Confirm the on-link color. */
+/* ── Landing CTA buttons ─────────────────────────────────────────────────── */
 [data-td-preset='ink'] .td-landing-landing {
-  --td-primary-bg:       #7c3aed;
-  --td-primary-bg-hover: #6d28d9;
+  --td-primary-bg:       oklch(49.1% 0.27 292.581);
+  --td-primary-bg-hover: oklch(54.1% 0.281 293.009);
   --td-primary-fg:       #ffffff;
 }
 
 [data-td-preset='ink'][data-bs-theme='dark'] .td-landing-landing,
 [data-td-preset='ink'] [data-bs-theme='dark'] .td-landing-landing {
-  --td-primary-bg:       #7c3aed;
-  --td-primary-bg-hover: #a78bfa;
+  --td-primary-bg:       oklch(54.1% 0.281 293.009);
+  --td-primary-bg-hover: oklch(81.1% 0.111 293.571);
   --td-primary-fg:       #ffffff;
+}
+
+/* Hard cyan offset shadow on primary buttons (dark) — matches app's --color-pop */
+[data-td-preset='ink'][data-bs-theme='dark'] .td-landing-button--primary,
+[data-td-preset='ink'] [data-bs-theme='dark'] .td-landing-button--primary {
+  box-shadow: 3px 3px 0 oklch(87% 0.13 195);
+  transition: box-shadow 0.1s, transform 0.1s;
+}
+[data-td-preset='ink'][data-bs-theme='dark'] .td-landing-button--primary:hover,
+[data-td-preset='ink'] [data-bs-theme='dark'] .td-landing-button--primary:hover {
+  box-shadow: 5px 5px 0 oklch(87% 0.13 195);
+  transform: translate(-2px, -2px);
+}
+
+/* Hard dark offset shadow on primary buttons (light) */
+[data-td-preset='ink']:not([data-bs-theme='dark']) .td-landing-button--primary {
+  box-shadow: 3px 3px 0 oklch(13% 0.028 261.692);
+  transition: box-shadow 0.1s, transform 0.1s;
+}
+[data-td-preset='ink']:not([data-bs-theme='dark']) .td-landing-button--primary:hover {
+  box-shadow: 5px 5px 0 oklch(13% 0.028 261.692);
+  transform: translate(-2px, -2px);
 }
