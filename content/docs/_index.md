@@ -18,6 +18,6 @@ The documentation follows four familiar paths: understand the project, get it ru
 
 - [Introduction](/docs/introduction/)
 - [Get Started](/docs/get-started/)
-- [Tutorial](/docs/tutorial/)
+- [Admin Guide](/docs/admin-guide/)
 - [Reference](/docs/reference/)
 {.cards}
