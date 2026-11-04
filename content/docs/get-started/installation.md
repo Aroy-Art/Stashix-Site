@@ -20,37 +20,52 @@ This guide runs Stashix and its PostgreSQL database with Docker Compose. Check
    curl -fsSL -o .env https://raw.githubusercontent.com/aroy-art/stashix/main/.env.example
    ```
 
-1. ### Generate secrets {#secrets}
+1. ### Fill in the secrets {#secrets}
 
-   Stashix needs three random values. Run each command and keep the output for
-   the next step:
+   Stashix needs three random secrets and a database password. Paste these
+   lines into your terminal, in the `stashix` folder, to generate them and
+   write them into `.env`:
 
    ```bash
-   openssl rand -base64 48   # SECRET_KEY_BASE
-   openssl rand -base64 48   # JWT_SECRET (a different value)
-   openssl rand -base64 32   # STASHIX_ENCRYPTION_KEY
+   set_env() { sed -i "s|^$1=.*|$1=$2|" .env; }
+   DB_PASSWORD=$(openssl rand -hex 24)
+   set_env SECRET_KEY_BASE "$(openssl rand -base64 48)"
+   set_env JWT_SECRET "$(openssl rand -base64 48)"
+   set_env STASHIX_ENCRYPTION_KEY "$(openssl rand -base64 32)"
+   set_env POSTGRES_PASSWORD "$DB_PASSWORD"
+   set_env DATABASE_URL "ecto://stashix:$DB_PASSWORD@db/stashix"
    ```
 
-1. ### Edit `.env` {#configure}
+   Run them once, before the first start. On macOS, change `sed -i` to
+   `sed -i ''` in the first line.
 
-   Open `.env` and set these values:
+   > [!WARNING]
+   > Back up `.env`. If `STASHIX_ENCRYPTION_KEY` is lost or changed, the
+   > metadata source credentials Stashix has stored can't be read anymore.
+   > Upgrading an install that ran without this key? See
+   > [Adding the key to an older install](/docs/reference/configuration/#encryption-key-upgrade).
+
+   {{< details summary="Prefer to fill them in by hand?" >}}
+   Open `.env` and set each value to the output of its command:
+
+   | Setting | Command |
+   |---|---|
+   | `SECRET_KEY_BASE` | `openssl rand -base64 48` |
+   | `JWT_SECRET` | `openssl rand -base64 48` (run it again for a different value) |
+   | `STASHIX_ENCRYPTION_KEY` | `openssl rand -base64 32` |
+   | `POSTGRES_PASSWORD` | Any password made of letters and numbers |
+   | `DATABASE_URL` | `ecto://stashix:<password>@db/stashix`, with the same password |
+   {{< /details >}}
+
+1. ### Point Stashix at your library {#configure}
+
+   Open `.env` and set the values only you know:
 
    | Setting | Set it to |
    |---|---|
-   | `SECRET_KEY_BASE` | The first secret. |
-   | `JWT_SECRET` | The second secret. |
-   | `STASHIX_ENCRYPTION_KEY` | The third secret. |
-   | `POSTGRES_PASSWORD` | A database password of your choice. |
-   | `DATABASE_URL` | `ecto://stashix:<password>@db/stashix`, with the same password. |
-   | `LIBRARY_PATH` | The folder on this machine that holds your comics and ebooks. |
+   | `LIBRARY_PATH` | The folder on this machine that holds your comics, such as `/srv/comics`. |
    | `PHX_HOST` | The hostname you'll use to reach Stashix, such as `stashix.home.lan`. |
    | `PUID` / `PGID` | A user and group that can read and write `LIBRARY_PATH`. `id -u` and `id -g` print yours. |
-
-   > [!WARNING]
-   > Keep `STASHIX_ENCRYPTION_KEY` safe and don't change it later: stored
-   > credentials encrypted with it become unreadable under a new key.
-   > Upgrading an install that ran without one? See
-   > [Adding the key to an older install](/docs/reference/configuration/#encryption-key-upgrade).
 
 1. ### Start Stashix {#start}
 
