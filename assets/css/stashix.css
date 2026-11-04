@@ -371,3 +371,19 @@
     margin: 36px 0 0;
   }
 }
+
+/* ── Phone navbar: menu links live in the drawer, so drop the centre icons ─ */
+@media (max-width: 767.98px) {
+  .td-site-header .td-site-nav {
+    grid-template-columns: minmax(max-content, 1fr) auto;
+  }
+  .td-site-header .td-nav-menu-zone {
+    display: none;
+  }
+
+  /* Drawer: search and theme are already icons in the navbar */
+  .td-site-drawer [data-td-shell-search-open],
+  .td-site-drawer .td-site-drawer__appearance {
+    display: none;
+  }
+}
