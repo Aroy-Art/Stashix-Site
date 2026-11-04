@@ -63,9 +63,20 @@ This guide runs Stashix and its PostgreSQL database with Docker Compose. Check
 
    | Setting | Set it to |
    |---|---|
-   | `LIBRARY_PATH` | The folder on this machine that holds your comics, such as `/srv/comics`. |
+   | `LIBRARIES_PATH` | Your media folder **on this machine** (the host), such as `/srv/media`. Not a path inside the container or in Stashix. |
    | `PHX_HOST` | The hostname you'll use to reach Stashix, such as `stashix.home.lan`. |
-   | `PUID` / `PGID` | A user and group that can read and write `LIBRARY_PATH`. `id -u` and `id -g` print yours. |
+   | `PUID` / `PGID` | A user and group that can read and write `LIBRARIES_PATH`. `id -u` and `id -g` print yours. |
+
+   Compose makes `LIBRARIES_PATH` appear inside the container as `/libraries`.
+   Stashix only sees that side, so the folders you add as libraries later start
+   with `/libraries`:
+
+   ```text
+   On this machine           Inside Stashix
+   /srv/media           ->   /libraries
+   /srv/media/comics    ->   /libraries/comics    <- add as a library
+   /srv/media/manga     ->   /libraries/manga     <- add as a library
+   ```
 
 1. ### Start Stashix {#start}
 
@@ -80,8 +91,9 @@ This guide runs Stashix and its PostgreSQL database with Docker Compose. Check
 1. ### Finish setup in the browser {#setup}
 
    Open `http://<your-server>:4000`. A setup wizard asks you to create the
-   admin account. Then add a library that points at a folder inside
-   `/libraries`, which is where the container sees your `LIBRARY_PATH`.
+   admin account. Then add a library. Enter its folder as Stashix sees it,
+   under `/libraries` (for example `/libraries/comics`), not the path on
+   your machine.
 
    Stashix scans it straight away. Watch the progress under
    **Admin → Libraries**.
@@ -101,12 +113,26 @@ Both the `stashix` and `db` containers should be up, and `db` should report
 
 | What | Where |
 |---|---|
-| Your comics and ebooks | `LIBRARY_PATH`, mounted at `/libraries` |
+| Your comics and ebooks | `LIBRARIES_PATH` on the host, mounted at `/libraries` |
 | Covers, thumbnails and image caches | The `stashix_data` volume |
 | Library, users and reading progress | The `postgres_data` volume |
 
 Back up the `postgres_data` volume to keep users and reading progress. Covers
 are extracted again on the next scan if `stashix_data` is lost.
+
+### Libraries on more than one disk {#more-folders}
+
+`LIBRARIES_PATH` mounts one host folder. For media in another place, add a
+line under `volumes:` in `docker-compose.yml` that mounts it under
+`/libraries`:
+
+```yaml
+    volumes:
+      - ${LIBRARIES_PATH:-${LIBRARY_PATH:-./libraries}}:/libraries
+      - /mnt/disk2/manga:/libraries/manga
+```
+
+Run `docker compose up -d`, then add `/libraries/manga` as a library.
 
 ### Metadata in your files {#metadata-write-back}
 
@@ -120,7 +146,7 @@ To keep your library untouched, mount it read-only:
 1. In Stashix, open **Admin → Metadata** and turn off **Write metadata to
    files**. Metadata is then kept only in the database.
 2. In `docker-compose.yml`, add `:ro` to the library mount:
-   `${LIBRARY_PATH:-./libraries}:/libraries:ro`.
+   `${LIBRARIES_PATH:-${LIBRARY_PATH:-./libraries}}:/libraries:ro`.
 3. Run `docker compose up -d`.
 
 Turn the setting off first: with a read-only mount and the setting on, every
@@ -130,11 +156,11 @@ file fails and is logged as an error.
 ## If something goes wrong {#troubleshooting}
 
 **The library stays empty.** The container user can't read your files. Check
-that `PUID` and `PGID` match an account with read access to `LIBRARY_PATH`,
+that `PUID` and `PGID` match an account with read access to `LIBRARIES_PATH`,
 then run `docker compose up -d` again.
 
 **Metadata changes don't show up in the files.** Check that `PUID` and `PGID`
-can write to `LIBRARY_PATH` and that the library isn't mounted with `:ro`. See
+can write to `LIBRARIES_PATH` and that the library isn't mounted with `:ro`. See
 [Metadata in your files](#metadata-write-back).
 
 **Some files are missing.** Only `.cbz`, `.cbr`, `.cb7`, `.pdf` and `.epub`

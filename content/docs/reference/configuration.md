@@ -16,7 +16,11 @@ live in the `.env` file next to `docker-compose.yml`. See
 | `JWT_SECRET` | none | Signs login tokens. Use a different value from `SECRET_KEY_BASE`. |
 | `STASHIX_ENCRYPTION_KEY` | none | Base64 32-byte key that encrypts stored metadata source credentials. Generate with `openssl rand -base64 32`. |
 | `DATABASE_URL` | `postgresql://stashix:stashix@db/stashix` | PostgreSQL connection, as `ecto://user:password@host/database`. |
-| `LIBRARY_PATH` | `./libraries` | Folder on the host that holds your comics and ebooks. Compose mounts it read-write at `/libraries` so metadata can be saved to your files; see [Metadata in your files](/docs/get-started/installation/#metadata-write-back). |
+| `LIBRARIES_PATH` | `./libraries` | Your media folder **on the host**, not a path inside the container. Compose mounts it read-write at `/libraries`, and each library in Stashix points at a folder under that, such as `/libraries/comics`. Read-write so metadata can be saved to your files; see [Metadata in your files](/docs/get-started/installation/#metadata-write-back). |
+
+`LIBRARIES_PATH` is used only by Docker Compose to mount the folder; Stashix
+itself never reads it. It used to be called `LIBRARY_PATH`, and `.env` files
+with the old name keep working.
 
 `docker compose up` refuses to start while `SECRET_KEY_BASE`, `JWT_SECRET` or
 `STASHIX_ENCRYPTION_KEY` is empty. Stashix also refuses to start if
@@ -42,7 +46,7 @@ read the credentials it is re-encrypting. Rotate it on a later restart.
 | Variable | Default | What it does |
 |---|---|---|
 | `PHX_HOST` | `localhost` | Public hostname, used when Stashix builds links. |
-| `PUID` / `PGID` | `1000` / `1000` | User and group the server runs as. They must be able to read and write `LIBRARY_PATH`. The data volume is handed to them on start. |
+| `PUID` / `PGID` | `1000` / `1000` | User and group the server runs as. They must be able to read and write `LIBRARIES_PATH`. The data volume is handed to them on start. |
 
 ## Database {#database}
 

@@ -40,7 +40,7 @@ Stashix never touch them.
 Stashix runs with Docker Compose next to a PostgreSQL database:
 
 ```bash
-cp .env.example .env   # set secrets and LIBRARY_PATH
+cp .env.example .env   # set secrets and LIBRARIES_PATH
 docker compose up -d   # then open http://localhost:4000
 ```
 
