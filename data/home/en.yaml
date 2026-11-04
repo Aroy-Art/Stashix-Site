@@ -1,4 +1,4 @@
-sections: [hero, cards, cta]
+sections: [hero, metrics, cards, command-box, cta]
 
 hero:
   align: start
@@ -10,34 +10,61 @@ hero:
     - { label: Get started, url: docs/get-started/, icon: fa-solid fa-rocket, style: primary }
     - { label: View on GitHub, url: "https://github.com/aroy-art/stashix", icon: fa-brands fa-github, style: ghost, external: true }
   slideshow:
-    - images/hero-screenshot.svg
-    # Add more screenshots here — one per Stashix feature/screen
+    - images/hero/hero-home.png
+    - images/hero/hero-reader.png
   media:
-    ratio: 1fr 1fr
+    ratio: 1fr 1.2fr
     hide_below: lg
-    max_width: 560px
+
+metrics:
+  class: sx-band
+  columns: 4
+  items:
+    - { value: 5, label: File formats, desc: "CBZ · CBR · CB7 · PDF · EPUB" }
+    - { value: 2, label: Metadata schemas, desc: "ComicInfo.xml · MetronInfo.xml" }
+    - { value: 5, suffix: s, label: To auto-import, desc: new files in watched folders }
+    - { value: 100, suffix: "%", label: Free & open source, desc: AGPL-3.0 }
 
 cards:
-  eyebrow: Everything you need
-  title: Ship your own shelf
+  eyebrow: Features
+  title: Everything your shelf needs
+  desc: Readers, metadata, search and sharing for comics and ebooks.
+  class: sx-features
   columns: 3
   items:
-    - title: User Guide
-      desc: Browse your library, read comics and ebooks in the browser, manage your account.
+    - title: Read in the browser
+      desc: Built-in readers for comics and ebooks. Your place is saved on every page.
       icon: fa-solid fa-book-open
-      url: docs/
-    - title: Admin Guide
-      desc: Set up libraries, manage users, configure permissions and age-gate controls.
-      icon: fa-solid fa-screwdriver-wrench
-      url: docs/
-    - title: Release Notes
-      desc: Stay up to date with new features, fixes, and breaking changes.
-      icon: fa-solid fa-bullhorn
-      url: blog/
+    - title: Folder watching
+      desc: Drop a file into a watched folder and it shows up in your library on its own.
+      icon: fa-solid fa-eye
+    - title: Rich metadata
+      desc: Reads ComicInfo.xml, MetronInfo.xml, sidecar files and filenames.
+      icon: fa-solid fa-tags
+    - title: Full-text search
+      desc: Search titles, series and publishers across the whole library.
+      icon: fa-solid fa-magnifying-glass
+    - title: Users & age-gates
+      desc: Admin and user roles with per-library permissions and age ratings.
+      icon: fa-solid fa-user-shield
+    - title: Install it like an app
+      desc: A progressive web app you can add to your Android home screen.
+      icon: fa-solid fa-mobile-screen
+
+command-box:
+  class: sx-quickstart
+  eyebrow: Quick start
+  title: Up and running in minutes
+  lang: bash
+  code: |
+    cp .env.example .env   # set secrets and LIBRARY_PATH
+    docker compose up -d   # then open http://localhost:4000
+  note: A setup wizard runs on first launch. See the [installation guide](docs/get-started/installation/).
 
 cta:
-  title: Ready to run Stashix?
-  text: Deploy with Docker in minutes. Bring your own CBZ, CBR, PDF, or EPUB collection.
-  label: Get started
-  url: docs/get-started/
-  style: primary
+  class: sx-cta
+  title: Start your next reading binge
+  desc: Self-hosted, free and open source. Bring your own CBZ, CBR, PDF or EPUB collection.
+  actions:
+    - { label: Get started, url: docs/get-started/, icon: fa-solid fa-rocket, style: primary }
+    - { label: View on GitHub, url: "https://github.com/aroy-art/stashix", icon: fa-brands fa-github, style: ghost, external: true }
