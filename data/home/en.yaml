@@ -5,7 +5,7 @@ hero:
   title_lines:
     - "Ready to start your"
     - "next reading binge?"
-  lead: Self-hosted comic book library. CBZ, CBR and CB7 — an in-browser reader, full-text search, and folder watching. Your collection, your server.
+  lead: Self-hosted comic book library. CBZ, CBR and CB7 — an in-browser reader, automatic metadata matching, full-text search, and folder watching. Your collection, your server.
   actions:
     - { label: Get started, url: docs/get-started/, icon: fa-solid fa-rocket, style: primary }
     - { label: View on GitHub, url: "https://github.com/aroy-art/stashix", icon: fa-brands fa-github, style: ghost, external: true }
@@ -20,7 +20,7 @@ metrics:
   columns: 4
   items:
     - { value: 3, label: Comic formats, desc: "CBZ · CBR · CB7" }
-    - { value: 2, label: Metadata schemas, desc: "ComicInfo.xml · MetronInfo.xml" }
+    - { value: 2, label: Metadata schemas, desc: "ComicInfo.xml · MetronInfo.xml, matched against Metron · Comic Vine · GCD" }
     - { value: 5, suffix: s, label: To auto-import, desc: new files in watched folders }
     - { value: 100, suffix: "%", label: Free & open source, desc: AGPL-3.0 }
 
@@ -37,8 +37,8 @@ cards:
     - title: Folder watching
       desc: Drop a file into a watched folder and it shows up in your library on its own.
       icon: fa-solid fa-eye
-    - title: Rich metadata
-      desc: Reads ComicInfo.xml, MetronInfo.xml, sidecar files and filenames.
+    - title: Series & issue matching
+      desc: Identifies every series and issue against Metron, Comic Vine and GCD, then fills in credits, summaries and story arcs. Unclear matches wait in a review queue.
       icon: fa-solid fa-tags
     - title: Full-text search
       desc: Search titles, series and publishers across the whole library.
