@@ -143,6 +143,21 @@
   width: auto;
 }
 
+/* Open-book mark beside the wordmark (navbar, phone subnav, sidebar) */
+.td-stashix-mark,
+.td-shell-sidebar__brand img.td-stashix-mark {
+  display: block;
+  height: 32px;
+  width: auto;
+  flex-shrink: 0;
+}
+.td-shell-subnav__brand,
+.td-shell-sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 /* ── Hero section ────────────────────────────────────────────────────────── */
 .td-landing-hero {
   background-color: var(--bs-secondary-bg);

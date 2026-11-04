@@ -1,64 +1,34 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   viewBox="0 0 32 32"
-   width="32"
-   height="32"
-   version="1.1"
-   id="svg3"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs2">
-    <filter
-       id="glow"
-       x="-0.51428571"
-       y="-0.51428571"
-       width="2.0285714"
-       height="2.0285714">
-      <feGaussianBlur
-         stdDeviation="1.5"
-         result="blur"
-         id="feGaussianBlur1" />
-      <feMerge
-         id="feMerge2">
-        <feMergeNode
-           in="blur"
-           id="feMergeNode1" />
-        <feMergeNode
-           in="SourceGraphic"
-           id="feMergeNode2" />
-      </feMerge>
-    </filter>
-    <clipPath
-       id="dot-clip">
-      <rect
-         x="0"
-         y="0"
-         width="32"
-         height="14"
-         id="rect2" />
-    </clipPath>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="180 360 894 536">
+  <defs>
+    <linearGradient id="cover" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8217f2"/>
+      <stop offset="1" stop-color="#650cd0"/>
+    </linearGradient>
+    <!-- middle pages: off-white, as if in the shadow of the front pages -->
+    <linearGradient id="middle" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ece3f9"/>
+      <stop offset="1" stop-color="#d6c6f0"/>
+    </linearGradient>
+    <!-- right middle page: darker than the right front page, which is already violet -->
+    <linearGradient id="middleR" gradientUnits="userSpaceOnUse" x1="660" y1="420" x2="1000" y2="800">
+      <stop offset="0" stop-color="#b48cf2"/>
+      <stop offset="1" stop-color="#8b55e6"/>
+    </linearGradient>
+    <linearGradient id="pageL" gradientUnits="userSpaceOnUse" x1="270" y1="380" x2="620" y2="820">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.45" stop-color="#f6effe"/>
+      <stop offset="1" stop-color="#d5bcfa"/>
+    </linearGradient>
+    <linearGradient id="pageR" gradientUnits="userSpaceOnUse" x1="660" y1="380" x2="980" y2="760">
+      <stop offset="0" stop-color="#d4b8fb"/>
+      <stop offset="1" stop-color="#a66ff3"/>
+    </linearGradient>
   </defs>
-  <!-- Rounded square background: violet-600 -->
-  <rect
-     width="32"
-     height="32"
-     rx="7"
-     fill="oklch(54.1% 0.281 293.009)"
-     id="rect3" />
-  <!-- "S" glyph in white, Big Shoulders Display style approximated -->
-  <path
-     d="m 22.643004,19.358 q 0,1.508 -0.78,2.86 -0.754,1.352 -2.366,2.21 -1.586,0.832 -4.134,0.832 -1.274,0 -2.236,-0.13 -0.936,-0.104 -1.768,-0.364 -0.832,-0.26 -1.7159996,-0.676 v -4.472 q 1.5079996,0.754 3.0419996,1.17 1.534,0.39 2.782,0.39 1.118,0 1.638,-0.39 0.52,-0.39 0.52,-0.988 0,-0.728 -0.78,-1.17 -0.754,-0.468 -2.574,-1.274 -1.378,-0.65 -2.392,-1.352 -1.014,-0.728 -1.56,-1.768 -0.5459996,-1.04 -0.5459996,-2.626 0,-1.794 0.8839996,-2.99 0.884,-1.222 2.444,-1.82 1.586,-0.624 3.666,-0.624 1.82,0 3.276,0.416 1.456,0.39 2.6,0.91 l -1.534,3.874 q -1.196,-0.546 -2.366,-0.858 -1.144,-0.338 -2.132,-0.338 -0.962,0 -1.43,0.338 -0.442,0.338 -0.442,0.858 0,0.442 0.338,0.78 0.338,0.338 1.118,0.754 0.806,0.39 2.184,1.014 1.352,0.598 2.288,1.326 0.962,0.702 1.456,1.69 0.52,0.962 0.52,2.418 z"
-     id="text3"
-     style="font-weight:900;font-size:26px;font-family:'Big Shoulders Display', Impact, sans-serif;text-anchor:middle;fill:#ffffff"
-     aria-label="S" />
-  <!-- Aqua dot in top-right corner -->
-  <circle
-     cx="25"
-     cy="7"
-     r="3.5"
-     fill="oklch(87% 0.13 195)"
-     filter="url(#glow)"
-     opacity="0.9"
-     id="circle3" />
+  <path fill="url(#cover)" d="M627 600 L275 445 L202 445 Q185 445 187 462 L222 762 Q225 780 245 780 C380 780 540 800 605 873 Q627 895 649 873 C714 800 874 780 1009 780 Q1029 780 1032 762 L1067 462 Q1069 445 1052 445 L979 445 Z"/>
+  <!-- middle pages: peek out beside and below the front pages, meeting them at the spine -->
+  <path fill="url(#middle)" d="M250 407 C400 407 560 452 622 560 L622 848 C545 768 410 726 266 724 L234 424 Q232 407 250 407 Z"/>
+  <path fill="url(#middleR)" d="M1004 407 C854 407 694 452 632 560 L632 848 C709 768 844 726 988 724 L1020 424 Q1022 407 1004 407 Z"/>
+  <path fill="url(#pageL)" d="M280 368 C430 368 560 420 622 548 L622 842 C540 745 420 705 302 705 L265 385 Q263 368 280 368 Z"/>
+  <path fill="url(#pageR)" d="M974 368 C824 368 694 420 632 548 L632 842 C714 745 834 705 952 705 L989 385 Q991 368 974 368 Z"/>
+  <path fill="#8a2cf0" d="M621 548 L627 538 L633 548 L633 848 L627 856 L621 848 Z"/>
 </svg>
