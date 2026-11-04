@@ -47,8 +47,10 @@ This guide runs Stashix and its PostgreSQL database with Docker Compose. Check
    | `PUID` / `PGID` | A user and group that can read and write `LIBRARY_PATH`. `id -u` and `id -g` print yours. |
 
    > [!WARNING]
-   > Set `STASHIX_ENCRYPTION_KEY` only on a new install. Adding it to an
-   > install that already has encrypted data makes that data unreadable.
+   > Keep `STASHIX_ENCRYPTION_KEY` safe and don't change it later: stored
+   > credentials encrypted with it become unreadable under a new key.
+   > Upgrading an install that ran without one? See
+   > [Adding the key to an older install](/docs/reference/configuration/#encryption-key-upgrade).
 
 1. ### Start Stashix {#start}
 
@@ -125,4 +127,8 @@ files are imported. See [How the scanner works](/docs/admin-guide/scanner/how-it
 and [File structure](/docs/admin-guide/scanner/file-structure/).
 
 **`docker compose up` refuses to start.** A required secret is empty. The
-error names it, for example `set SECRET_KEY_BASE in .env`.
+error names it, for example `set STASHIX_ENCRYPTION_KEY in .env`.
+
+**Stashix exits saying `STASHIX_ENCRYPTION_KEY` is not valid base64 or must
+decode to 32 bytes.** The key was mistyped or generated with the wrong length.
+Generate it with `openssl rand -base64 32` and paste the whole output.

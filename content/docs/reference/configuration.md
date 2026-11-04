@@ -14,24 +14,35 @@ live in the `.env` file next to `docker-compose.yml`. See
 |---|---|---|
 | `SECRET_KEY_BASE` | none | Encrypts and signs sessions and cookies. Generate with `openssl rand -base64 48`. |
 | `JWT_SECRET` | none | Signs login tokens. Use a different value from `SECRET_KEY_BASE`. |
+| `STASHIX_ENCRYPTION_KEY` | none | Base64 32-byte key that encrypts stored metadata source credentials. Generate with `openssl rand -base64 32`. |
 | `DATABASE_URL` | `postgresql://stashix:stashix@db/stashix` | PostgreSQL connection, as `ecto://user:password@host/database`. |
 | `LIBRARY_PATH` | `./libraries` | Folder on the host that holds your comics and ebooks. Compose mounts it read-write at `/libraries` so metadata can be saved to your files; see [Metadata in your files](/docs/get-started/installation/#metadata-write-back). |
 
-`docker compose up` refuses to start while `SECRET_KEY_BASE` or `JWT_SECRET`
-is empty.
+`docker compose up` refuses to start while `SECRET_KEY_BASE`, `JWT_SECRET` or
+`STASHIX_ENCRYPTION_KEY` is empty. Stashix also refuses to start if
+`STASHIX_ENCRYPTION_KEY` isn't valid base64 or doesn't decode to 32 bytes.
+
+> [!WARNING]
+> Don't change `STASHIX_ENCRYPTION_KEY` once it's set: credentials encrypted
+> with the old key become unreadable.
+
+### Adding the key to an older install {#encryption-key-upgrade}
+
+Installs that started without `STASHIX_ENCRYPTION_KEY` encrypted their stored
+credentials with a key derived from `JWT_SECRET`. To upgrade, generate a key,
+add it to `.env` and restart. On that start Stashix re-encrypts the existing
+credentials with the new key, and from then on they no longer depend on
+`JWT_SECRET`.
+
+Don't change `JWT_SECRET` in the same restart: Stashix needs the old value to
+read the credentials it is re-encrypting. Rotate it on a later restart.
 
 ## Recommended {#recommended}
 
 | Variable | Default | What it does |
 |---|---|---|
-| `STASHIX_ENCRYPTION_KEY` | derived from `JWT_SECRET` | Base64 32-byte key that encrypts stored metadata source credentials. Generate with `openssl rand -base64 32`. |
 | `PHX_HOST` | `localhost` | Public hostname, used when Stashix builds links. |
 | `PUID` / `PGID` | `1000` / `1000` | User and group the server runs as. They must be able to read and write `LIBRARY_PATH`. The data volume is handed to them on start. |
-
-> [!WARNING]
-> Set `STASHIX_ENCRYPTION_KEY` on new installs only. Without it, rotating
-> `JWT_SECRET` makes stored credentials unreadable. Adding it to an install
-> that already has encrypted data breaks that data, so leave it empty there.
 
 ## Database {#database}
 
