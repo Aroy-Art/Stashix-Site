@@ -15,4 +15,4 @@ cascade:
   reading_time: true
 ---
 
-Follow the project through articles, design decisions, and release notes.
+News, design notes and release announcements for Stashix.

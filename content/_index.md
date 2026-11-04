@@ -1,4 +1,4 @@
 ---
-title: Project Name
-description: Documentation, updates, and a practical guide for your project.
+title: Stashix
+description: Self-hosted comic book and ebook library. Documentation, guides and release notes.
 ---

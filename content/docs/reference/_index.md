@@ -1,6 +1,6 @@
 ---
 title: Reference
-description: Look up configuration and commands without reading a tutorial.
+description: Look up exact settings and behaviour.
 weight: 40
 icon: fa-solid fa-book-open
 menus:
@@ -12,4 +12,7 @@ menus:
       icon: fa-solid fa-book-open
 ---
 
-Use this section when you already know what you need to find.
+Look up exact settings when you already know what you need.
+
+- [Configuration](configuration/): every environment variable, with defaults.
+{.cards}

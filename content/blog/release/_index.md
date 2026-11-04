@@ -1,6 +1,6 @@
 ---
 title: Releases
-description: Version announcements and concise upgrade notes.
+description: Stashix releases and upgrade notes.
 weight: 30
 icon: fa-solid fa-tags
 blog_index: table

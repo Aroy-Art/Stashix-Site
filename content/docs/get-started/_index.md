@@ -54,7 +54,7 @@ your library folder ──(read-only)──▶ stashix ◀──▶ postgres
 | Docker with Compose | Any host that runs Linux containers: a home server, a NAS or a VPS. |
 | Your library on disk | One folder (or a parent of several) that holds your comics and ebooks. |
 | A user ID that can read it | Stashix runs as `PUID`/`PGID` (default `1000`) and must be able to read the library folder. |
-| Three random secrets | Generated with `openssl` during setup. See [Installation](installation/#secrets). |
+| Three random secrets | Generated with `openssl` during setup. See [Installation](/docs/get-started/installation/#secrets). |
 | A modern browser | Any current desktop or mobile browser. |
 
 PostgreSQL ships in the Compose file, so you don't need to install a database
@@ -63,7 +63,7 @@ yourself.
 ## Choose how to install {#install}
 
 {{< cards >}}
-{{< card title="Docker Compose" link="installation/" icon="fa-brands fa-docker" badge="Recommended" >}}
+{{< card title="Docker Compose" link="/docs/get-started/installation/" icon="fa-brands fa-docker" badge="Recommended" >}}
 Copy `.env.example`, set your secrets and library path, then run
 `docker compose up -d`. A setup wizard opens on first launch.
 {{< /card >}}

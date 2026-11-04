@@ -1,6 +1,6 @@
 ---
 title: Docs
-description: Learn the project, install it, follow a tutorial, and look up exact behavior.
+description: Install Stashix, run your library, and look up exact settings.
 type: docs
 icon: fa-solid fa-book
 sidebar_root_for: self
@@ -14,9 +14,9 @@ cascade:
   footer_style: slim
 ---
 
-The documentation follows four familiar paths: understand the project, get it running, learn by doing, then consult the reference.
+Start with Get Started if Stashix is new to you. The Admin Guide covers
+running the server, and the Reference lists every setting.
 
-- [Introduction](/docs/introduction/)
 - [Get Started](/docs/get-started/)
 - [Admin Guide](/docs/admin-guide/)
 - [Reference](/docs/reference/)

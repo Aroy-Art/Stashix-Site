@@ -1,23 +1,83 @@
 ---
 title: Configuration
-description: Record supported keys, defaults, and examples in one place.
+description: Every environment variable Stashix reads, with defaults and what each one does.
 weight: 10
 ---
 
-Replace this small table with the public configuration surface of your project.
+Stashix is configured with environment variables. With Docker Compose they
+live in the `.env` file next to `docker-compose.yml`. See
+[Installation](/docs/get-started/installation/) for a first setup.
 
-| Key | Type | Default | Meaning |
-| --- | --- | --- | --- |
-| `listen` | string | `127.0.0.1:8080` | Address used by the local server |
-| `log_level` | string | `info` | Minimum emitted log level |
-| `read_only` | boolean | `false` | Disable operations that change state |
+## Required {#required}
 
-## Example {#example}
+| Variable | Default | What it does |
+|---|---|---|
+| `SECRET_KEY_BASE` | none | Encrypts and signs sessions and cookies. Generate with `openssl rand -base64 48`. |
+| `JWT_SECRET` | none | Signs login tokens. Use a different value from `SECRET_KEY_BASE`. |
+| `DATABASE_URL` | `postgresql://stashix:stashix@db/stashix` | PostgreSQL connection, as `ecto://user:password@host/database`. |
+| `LIBRARY_PATH` | `./libraries` | Folder on the host that holds your comics and ebooks. Compose mounts it read-only at `/libraries`. |
+
+`docker compose up` refuses to start while `SECRET_KEY_BASE` or `JWT_SECRET`
+is empty.
+
+## Recommended {#recommended}
+
+| Variable | Default | What it does |
+|---|---|---|
+| `STASHIX_ENCRYPTION_KEY` | derived from `JWT_SECRET` | Base64 32-byte key that encrypts stored metadata source credentials. Generate with `openssl rand -base64 32`. |
+| `PHX_HOST` | `localhost` | Public hostname, used when Stashix builds links. |
+| `PUID` / `PGID` | `1000` / `1000` | User and group the server runs as. They must be able to read `LIBRARY_PATH`. The data volume is handed to them on start. |
+
+> [!WARNING]
+> Set `STASHIX_ENCRYPTION_KEY` on new installs only. Without it, rotating
+> `JWT_SECRET` makes stored credentials unreadable. Adding it to an install
+> that already has encrypted data breaks that data, so leave it empty there.
+
+## Database {#database}
+
+These configure the bundled PostgreSQL container. Keep the user and password
+in step with `DATABASE_URL`.
+
+| Variable | Default | What it does |
+|---|---|---|
+| `POSTGRES_DB` | `stashix` | Database name. |
+| `POSTGRES_USER` | `stashix` | Database user. |
+| `POSTGRES_PASSWORD` | `stashix` | Database password. Change it. |
+| `POOL_SIZE` | `10` | Database connections Stashix keeps open. |
+| `ECTO_IPV6` | `false` | Set to `true` or `1` to reach the database over IPv6. |
+
+## Storage {#storage}
+
+| Variable | Default | What it does |
+|---|---|---|
+| `DATA_DIR` | `/data` in Docker | Base folder for everything Stashix generates. |
+| `THUMBNAIL_DIR` | `DATA_DIR/thumbnails` | Cover thumbnails extracted from your files. |
+| `IMAGE_CACHE_DIR` | `DATA_DIR/cache/images/resized` | Resized and WebP cover images. |
+| `METADATA_IMAGE_DIR` | `DATA_DIR/cache/images/metadata` | Images from metadata sources. |
+
+All of these are created on start. Covers are extracted again on the next
+scan if the folders are lost, but keep them on a persistent volume to avoid
+the rescan.
+
+## Server {#server}
+
+| Variable | Default | What it does |
+|---|---|---|
+| `PORT` | `4000` | HTTP port inside the container. To reach Stashix on another port, change the `ports` mapping in `docker-compose.yml` instead. |
+| `DNS_CLUSTER_QUERY` | none | DNS query used to find other nodes when clustering. |
+
+Prometheus metrics are served on a separate port, `9568`, at `/metrics`.
+
+## Settings Compose doesn't pass through {#compose}
+
+The Compose file forwards only the variables it uses, and it pins `PORT` to
+`4000` and `DATA_DIR` to `/data`. To use `POOL_SIZE`, `ECTO_IPV6`,
+`DNS_CLUSTER_QUERY` or the individual storage folders, add them to the
+`environment` block of the `stashix` service:
 
 ```yaml
-listen: 0.0.0.0:8080
-log_level: debug
-read_only: true
+services:
+  stashix:
+    environment:
+      POOL_SIZE: 20
 ```
-
-Document validation and precedence beside the keys, not in a separate hidden guide.
