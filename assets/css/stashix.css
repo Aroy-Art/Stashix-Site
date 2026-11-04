@@ -290,14 +290,18 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
-.sx-band .td-landing-metric small { color: rgb(255 255 255 / 0.72); }
+.sx-band .td-landing-metric small {
+  color: rgb(255 255 255 / 0.8);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
 /* "More coming soon" sticker on the comic-formats metric (first item). */
 .sx-band .td-landing-metric:first-child { position: relative; }
 .sx-band .td-landing-metric:first-child::after {
   content: "More coming soon!";
   position: absolute;
-  top: 4px;
-  left: clamp(3.6rem, 5.5vw, 4.8rem);
+  top: -4px;
+  left: calc(50% + 1.6rem);
   padding: 4px 10px;
   border: 2px solid oklch(13% 0.028 261.692);
   border-radius: 4px;
@@ -312,6 +316,14 @@
   box-shadow: 3px 3px 0 oklch(13% 0.028 261.692 / 0.55);
   transform: rotate(-6deg);
   pointer-events: none;
+}
+/* Narrow columns: centre the sticker above the number instead. */
+@media (max-width: 767.98px) {
+  .sx-band .td-landing-metric:first-child::after {
+    top: -1.9rem;
+    left: 50%;
+    transform: translateX(-50%) rotate(-4deg);
+  }
 }
 @media (max-width: 767.98px) {
   .sx-band .td-landing-metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

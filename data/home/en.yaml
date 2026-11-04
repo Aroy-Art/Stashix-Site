@@ -18,8 +18,8 @@ metrics:
   class: sx-band
   columns: 4
   items:
-    - { value: 3, label: Comic formats, desc: "CBZ · CBR · CB7" }
-    - { value: 2, label: Metadata schemas, desc: "ComicInfo.xml · MetronInfo.xml, matched against Metron · Comic Vine · GCD" }
+    - { value: 3, label: Comic formats, desc: "CBZ&nbsp;· CBR&nbsp;· CB7<br>(partial support for PDF&nbsp;· EPUB)" }
+    - { value: 2, label: Metadata schemas, desc: "ComicInfo.xml&nbsp;· MetronInfo.xml, matched against Metron&nbsp;· Comic&nbsp;Vine&nbsp;· GCD" }
     - { value: 5, suffix: s, label: To auto-import, desc: new files in watched folders }
     - { value: 100, suffix: "%", label: Free & open source, desc: AGPL-3.0 }
 
