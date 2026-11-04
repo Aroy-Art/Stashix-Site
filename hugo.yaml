@@ -1,5 +1,5 @@
 title: &siteTitle Stashix
-baseURL: https://stashix.org/
+baseURL: https://stashix.net/
 defaultContentLanguage: en
 enableGitInfo: false
 enableRobotsTXT: true
