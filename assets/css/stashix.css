@@ -137,30 +137,45 @@
 }
 
 /* ── Navbar wordmark (inline SVG) ────────────────────────────────────────── */
+/* The partials crop the wordmark's viewBox to y 8–44, just around the
+   letters (y 13.2–40.1 with drop shadow) and their glow. At 35px the
+   letters are ~26px tall, leaving ~12px above and below in the 50px bar. */
 .td-stashix-wordmark {
   display: block;
-  height: 32px;
+  height: 35px;
   width: auto;
 }
 
 /* Open-book mark beside the wordmark (navbar, phone subnav, sidebar).
-   The wordmark's letters (with their drop shadow) span y 13.2–40.1 of its
-   46-unit viewBox, so at 32px the text is ~19px tall and sits ~2.5px below
-   the box's centre.
-   Match that height and nudge the mark down to share the text's centre. */
+   Same height as the letters; the letters sit ~0.6px below the box's
+   centre, and the book goes ~2px lower still because its weight is at
+   the top. */
 .td-stashix-mark,
 .td-shell-sidebar__brand img.td-stashix-mark {
   display: block;
-  height: 19px;
+  height: 26px;
   width: auto;
   flex-shrink: 0;
-  transform: translateY(2.5px);
+  transform: translateY(2.6px);
 }
 .td-shell-subnav__brand,
 .td-shell-sidebar__brand {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+/* The docs sidebar shares its brand row with search and panel buttons;
+   a slightly smaller brand keeps them inside the sidebar. */
+.td-shell-sidebar__brand {
+  gap: 8px;
+}
+.td-shell-sidebar__brand .td-stashix-wordmark {
+  height: 26px;
+}
+.td-shell-sidebar__brand img.td-stashix-mark {
+  height: 19.5px;
+  transform: translateY(2px);
 }
 
 /* ── Hero section ────────────────────────────────────────────────────────── */
