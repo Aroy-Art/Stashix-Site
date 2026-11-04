@@ -387,3 +387,86 @@
     display: none;
   }
 }
+
+/* ── Phone drawer: draw the menu as a tree ───────────────────────────────── */
+/* Parent rows read as branches; children hang off a rail under the parent
+   icon (row padding 10px + half the 18px icon column = 19px). */
+.td-site-drawer nav > .td-site-nav__menu-link {
+  color: var(--bs-body-color);
+  font-weight: 600;
+}
+.td-site-drawer nav > .td-site-nav__menu-link > i {
+  color: var(--td-preset-accent);
+}
+.td-site-drawer .td-site-drawer__children {
+  margin: 0 0 8px 19px;
+  padding-inline-start: 0;
+}
+.td-site-drawer .td-site-drawer__children > .td-site-nav__menu-child {
+  position: relative;
+  margin-inline-start: 18px;
+}
+.td-site-drawer .td-site-drawer__children > .td-site-nav__menu-child::before,
+.td-site-drawer .td-site-drawer__children > .td-site-nav__menu-child::after {
+  content: "";
+  position: absolute;
+  left: -18px;
+  pointer-events: none;
+  border-color: var(--td-brand-line-strong);
+}
+/* rail through the whole row */
+.td-site-drawer .td-site-drawer__children > .td-site-nav__menu-child::before {
+  top: 0;
+  bottom: 0;
+  border-left: 1.5px solid;
+}
+/* elbow into the row */
+.td-site-drawer .td-site-drawer__children > .td-site-nav__menu-child::after {
+  top: 50%;
+  width: 14px;
+  border-top: 1.5px solid;
+}
+/* last child: the rail stops at the elbow and curves into it */
+.td-site-drawer .td-site-drawer__children > .td-site-nav__menu-child:last-child::before {
+  bottom: 50%;
+  width: 14px;
+  border-bottom: 1.5px solid;
+  border-bottom-left-radius: 8px;
+}
+.td-site-drawer .td-site-drawer__children > .td-site-nav__menu-child:last-child::after {
+  content: none;
+}
+.td-site-drawer .td-site-drawer__children > .td-site-nav__menu-child:is(:hover, :focus-visible, .active)::after,
+.td-site-drawer .td-site-drawer__children > .td-site-nav__menu-child:last-child:is(:hover, :focus-visible, .active)::before {
+  border-color: var(--td-preset-accent);
+}
+/* first child: reach up to meet the parent icon */
+.td-site-drawer .td-site-drawer__children > .td-site-nav__menu-child:first-child::before {
+  top: -8px;
+}
+
+/* ── Feature cards on phones: two compact columns instead of one ─────────── */
+@media (max-width: 767.98px) {
+  .sx-features .td-landing-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .sx-features .td-landing-card {
+    padding: 16px 14px;
+  }
+  .sx-features .td-landing-card__media {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 12px;
+    font-size: 1rem;
+  }
+  .sx-features .td-landing-card h3 {
+    margin-bottom: 6px;
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+  .sx-features .td-landing-card__description {
+    font-size: 0.82rem;
+    line-height: 1.45;
+  }
+}
