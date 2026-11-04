@@ -5,7 +5,7 @@ hero:
   title_lines:
     - "Ready to start your"
     - "next reading binge?"
-  lead: Self-hosted comic book and ebook library. CBZ, CBR, CB7, PDF and EPUB — in-browser readers, full-text search, and folder watching. Your collection, your server.
+  lead: Self-hosted comic book and ebook library. CBZ, CBR, CB7, PDF and image-based EPUB — an in-browser reader, full-text search, and folder watching. Your collection, your server.
   actions:
     - { label: Get started, url: docs/get-started/, icon: fa-solid fa-rocket, style: primary }
     - { label: View on GitHub, url: "https://github.com/aroy-art/stashix", icon: fa-brands fa-github, style: ghost, external: true }
@@ -19,7 +19,7 @@ metrics:
   class: sx-band
   columns: 4
   items:
-    - { value: 5, label: File formats, desc: "CBZ · CBR · CB7 · PDF · EPUB" }
+    - { value: 5, label: File formats, desc: "CBZ · CBR · CB7 · PDF · image EPUB" }
     - { value: 2, label: Metadata schemas, desc: "ComicInfo.xml · MetronInfo.xml" }
     - { value: 5, suffix: s, label: To auto-import, desc: new files in watched folders }
     - { value: 100, suffix: "%", label: Free & open source, desc: AGPL-3.0 }
@@ -27,12 +27,12 @@ metrics:
 cards:
   eyebrow: Features
   title: Everything your shelf needs
-  desc: Readers, metadata, search and sharing for comics and ebooks.
+  desc: A reader, metadata, search and sharing for comics and manga.
   class: sx-features
   columns: 3
   items:
     - title: Read in the browser
-      desc: Built-in readers for comics and ebooks. Your place is saved on every page.
+      desc: A built-in reader for comics and manga. Your place is saved on every page.
       icon: fa-solid fa-book-open
     - title: Folder watching
       desc: Drop a file into a watched folder and it shows up in your library on its own.

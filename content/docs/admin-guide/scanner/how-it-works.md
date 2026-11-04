@@ -13,10 +13,12 @@ Stashix reads the following file types:
 | Comic Book ZIP | `.cbz` | Most common; ZIP archive of images |
 | Comic Book RAR | `.cbr` | RAR archive of images |
 | Comic Book 7-Zip | `.cb7` | 7-Zip archive of images |
-| EPUB | `.epub` | Ebooks and manga |
-| PDF | `.pdf` | Comics and ebooks scanned to PDF |
+| EPUB | `.epub` | Image-based EPUBs, such as manga (see below) |
+| PDF | `.pdf` | Comics and books as PDF |
 
 All other extensions are silently ignored. Files are matched case-insensitively (`.CBZ` and `.cbz` are equivalent).
+
+**EPUB support is image-only.** Stashix opens an EPUB like a `.cbz`: the images inside become its pages and the chapter text is ignored. Fixed-layout manga and comic EPUBs read normally. Text ebooks such as novels are imported into the library, but the reader shows only their images (often just the cover). A reader for text EPUBs is not available yet.
 
 ---
 

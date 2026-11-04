@@ -18,7 +18,7 @@ shelf you can read from any browser on your network.
 
 ## What you get {#features}
 
-- **Readers in the browser.** Open a comic or ebook and start reading. Your
+- **A reader in the browser.** Open a comic or manga and start reading. Your
   place is saved per user, so you can pick up on another device.
 - **A library that keeps itself up to date.** Stashix
   [watches your folders](/docs/admin-guide/scanner/how-it-works/#folder-watching)
@@ -32,7 +32,9 @@ shelf you can read from any browser on your network.
 - **Installable on your phone** as a progressive web app on Android.
 
 Stashix reads `.cbz`, `.cbr`, `.cb7`, `.pdf` and `.epub` files. Anything else
-in a library folder is ignored.
+in a library folder is ignored. EPUBs are shown as their images, so they work
+for manga and comics but not yet for text ebooks such as novels; see
+[supported formats](/docs/admin-guide/scanner/how-it-works/#supported-formats).
 
 ## How it fits together {#overview}
 

@@ -19,8 +19,8 @@ Most collections start as a folder of `.cbz` files and grow into something
 nobody can find their way around. Stashix keeps your files where they are and
 builds a library on top of them:
 
-- **Read in the browser.** Built-in readers for comics and ebooks save your
-  place on every page, per user.
+- **Read in the browser.** The built-in reader for comics and manga saves
+  your place on every page, per user.
 - **Folder watching.** Drop a file into a watched folder and it appears in the
   library a few seconds later.
 - **Metadata from your files.** Series, issue numbers, creators and publishers
@@ -30,7 +30,8 @@ builds a library on top of them:
   permissions and age-gates.
 - **Installable on your phone** as a progressive web app.
 
-Stashix reads `.cbz`, `.cbr`, `.cb7`, `.pdf` and `.epub` files. Your library
+Stashix reads `.cbz`, `.cbr`, `.cb7` and `.pdf` files, plus image-based
+`.epub` files such as manga. Text ebooks can't be read yet. Your library
 folder is mounted read-only, so Stashix never changes your files.
 
 ## Try it
