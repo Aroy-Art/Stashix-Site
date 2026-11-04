@@ -39,11 +39,12 @@ for manga and comics but not yet for text ebooks such as novels; see
 ## How it fits together {#overview}
 
 Stashix runs as two containers: the Stashix server and a PostgreSQL database.
-The default Compose file mounts your library folder **read-only**. Covers,
-thumbnails and caches go into a separate data volume.
+The default Compose file mounts your library folder read-write, so metadata
+you edit can be saved back into your files. Covers, thumbnails and caches go
+into a separate data volume.
 
 ```text
-your library folder ──(read-only)──▶ stashix ◀──▶ postgres
+your library folder ◀─(read-write)─▶ stashix ◀──▶ postgres
                                         │
                                         ▼
                               browser · :4000
@@ -55,7 +56,7 @@ your library folder ──(read-only)──▶ stashix ◀──▶ postgres
 |---|---|
 | Docker with Compose | Any host that runs Linux containers: a home server, a NAS or a VPS. |
 | Your library on disk | One folder (or a parent of several) that holds your comics and ebooks. |
-| A user ID that can read it | Stashix runs as `PUID`/`PGID` (default `1000`) and must be able to read the library folder. |
+| A user ID that can use it | Stashix runs as `PUID`/`PGID` (default `1000`) and must be able to read the library folder, and write to it to save metadata. |
 | Three random secrets | Generated with `openssl` during setup. See [Installation](/docs/get-started/installation/#secrets). |
 | A modern browser | Any current desktop or mobile browser. |
 

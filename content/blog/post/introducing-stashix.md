@@ -31,8 +31,9 @@ builds a library on top of them:
 - **Installable on your phone** as a progressive web app.
 
 Stashix reads `.cbz`, `.cbr`, `.cb7` and `.pdf` files, plus image-based
-`.epub` files such as manga. Text ebooks can't be read yet. Your library
-folder is mounted read-only, so Stashix never changes your files.
+`.epub` files such as manga. Text ebooks can't be read yet. Metadata you
+edit is saved back to your files, or kept only in the database if you'd rather
+Stashix never touch them.
 
 ## Try it
 

@@ -15,7 +15,7 @@ live in the `.env` file next to `docker-compose.yml`. See
 | `SECRET_KEY_BASE` | none | Encrypts and signs sessions and cookies. Generate with `openssl rand -base64 48`. |
 | `JWT_SECRET` | none | Signs login tokens. Use a different value from `SECRET_KEY_BASE`. |
 | `DATABASE_URL` | `postgresql://stashix:stashix@db/stashix` | PostgreSQL connection, as `ecto://user:password@host/database`. |
-| `LIBRARY_PATH` | `./libraries` | Folder on the host that holds your comics and ebooks. Compose mounts it read-only at `/libraries`. |
+| `LIBRARY_PATH` | `./libraries` | Folder on the host that holds your comics and ebooks. Compose mounts it read-write at `/libraries` so metadata can be saved to your files; see [Metadata in your files](/docs/get-started/installation/#metadata-write-back). |
 
 `docker compose up` refuses to start while `SECRET_KEY_BASE` or `JWT_SECRET`
 is empty.
@@ -26,7 +26,7 @@ is empty.
 |---|---|---|
 | `STASHIX_ENCRYPTION_KEY` | derived from `JWT_SECRET` | Base64 32-byte key that encrypts stored metadata source credentials. Generate with `openssl rand -base64 32`. |
 | `PHX_HOST` | `localhost` | Public hostname, used when Stashix builds links. |
-| `PUID` / `PGID` | `1000` / `1000` | User and group the server runs as. They must be able to read `LIBRARY_PATH`. The data volume is handed to them on start. |
+| `PUID` / `PGID` | `1000` / `1000` | User and group the server runs as. They must be able to read and write `LIBRARY_PATH`. The data volume is handed to them on start. |
 
 > [!WARNING]
 > Set `STASHIX_ENCRYPTION_KEY` on new installs only. Without it, rotating
