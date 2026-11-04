@@ -3,8 +3,7 @@ sections: [hero, metrics, cards, command-box, cta]
 hero:
   align: start
   title_lines:
-    - "Ready to start your"
-    - "next reading binge?"
+    - "Ready to start your next reading binge?"
   lead: Self-hosted comic book library. CBZ, CBR and CB7 — an in-browser reader, automatic metadata matching, full-text search, and folder watching. Your collection, your server.
   actions:
     - { label: Get started, url: docs/get-started/, icon: fa-solid fa-rocket, style: primary }
