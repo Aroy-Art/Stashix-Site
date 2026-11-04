@@ -1,0 +1,77 @@
+{{- /*
+  Release pages built from the app's CHANGELOG.md (Keep a Changelog format).
+
+  Each "## [version] - date" section becomes one page under /blog/release/.
+  Empty sections (such as an empty [Unreleased]) are skipped. A section whose
+  date is not YYYY-MM-DD (for example "unreleased") gets no date and a note
+  saying the version is not out yet. The link definitions at the bottom of the
+  changelog ("[0.0.1]: https://…") become each page's "release notes" link.
+
+  Override the source with params.stashix.changelog_url in hugo.yaml.
+  A failed download only warns, so the site still builds offline.
+*/ -}}
+{{- $url := "https://raw.githubusercontent.com/aroy-art/stashix/main/CHANGELOG.md" -}}
+{{- with site.Params.stashix }}{{ with .changelog_url }}{{ $url = . }}{{ end }}{{ end -}}
+
+{{- $text := "" -}}
+{{- with try (resources.GetRemote $url) -}}
+  {{- with .Err -}}
+    {{- warnf "releases: could not fetch %s: %s" $url . -}}
+  {{- else with .Value -}}
+    {{- $text = replace .Content "\r\n" "\n" -}}
+  {{- else -}}
+    {{- warnf "releases: %s returned no content" $url -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Link definitions apply to the whole file; pull them out of the bodies. */ -}}
+{{- $linkDefs := findRE `(?m)^\[[^\]\n]+\]:[ \t]+\S+[ \t]*$` $text -}}
+{{- $text = replaceRE `(?m)^\[[^\]\n]+\]:[ \t]+\S+[ \t]*\n?` "" $text -}}
+
+{{- range after 1 (split (printf "\n%s" $text) "\n## [") -}}
+  {{- $m := findRESubmatch `^([^\]\n]+)\][ \t]*(?:-[ \t]*([^\n]*))?\n?([\s\S]*)$` . 1 -}}
+  {{- if not $m }}{{ continue }}{{ end -}}
+  {{- $m = index $m 0 -}}
+  {{- $version := strings.TrimSpace (index $m 1) -}}
+  {{- $when := strings.TrimSpace (index $m 2) -}}
+  {{- $body := strings.TrimSpace (index $m 3) -}}
+  {{- if or (not $body) (eq (lower $version) "unreleased") }}{{ continue }}{{ end -}}
+
+  {{- /* Release notes link from the matching "[version]: url" definition. */ -}}
+  {{- $notes := "" -}}
+  {{- range $linkDefs -}}
+    {{- $d := findRESubmatch `^\[([^\]]+)\]:[ \t]+(\S+)` . 1 -}}
+    {{- if and $d (eq (lower (index (index $d 0) 1)) (lower $version)) }}{{ $notes = index (index $d 0) 2 }}{{ end -}}
+  {{- end -}}
+
+  {{- /* The text before the first "###" heading is the summary. */ -}}
+  {{- $summary := strings.TrimSpace (index (split $body "\n### ") 0) -}}
+  {{- if hasPrefix $summary "### " }}{{ $summary = "" }}{{ end -}}
+  {{- $summary = replaceRE `\s+` " " $summary -}}
+
+  {{- $released := findRE `^\d{4}-\d{2}-\d{2}$` $when -}}
+
+  {{- /* The summary is shown as the page description, so drop it from the
+         body. Changelog sections are ###; promote them so they reach the TOC. */ -}}
+  {{- $rest := $body -}}
+  {{- if $summary }}{{ $rest = strings.TrimSpace (substr $body (len (index (split $body "\n### ") 0))) }}{{ end -}}
+  {{- $content := replaceRE `(?m)^### ` "## " $rest -}}
+  {{- if not $released -}}
+    {{- $content = printf "> [!NOTE]\n> This version has not been released yet. The notes below may still change.\n\n%s" $content -}}
+  {{- end -}}
+  {{- with $notes -}}
+    {{- $content = printf "%s\n\n[Release notes on the Stashix repository](%s)" $content . -}}
+  {{- end -}}
+
+  {{- $params := dict "version" $version "released" (gt (len $released) 0) -}}
+  {{- with $summary }}{{ $params = merge $params (dict "description" .) }}{{ end -}}
+  {{- $page := dict
+    "path" (urlize $version)
+    "title" (printf "Stashix %s" $version)
+    "content" (dict "mediaType" "text/markdown" "value" $content)
+    "params" $params
+  -}}
+  {{- with $summary }}{{ $page = merge $page (dict "summary" .) }}{{ end -}}
+  {{- if $released }}{{ $page = merge $page (dict "date" $when) }}{{ end -}}
+  {{- $.AddPage $page -}}
+{{- end -}}

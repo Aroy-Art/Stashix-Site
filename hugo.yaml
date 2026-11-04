@@ -59,3 +59,10 @@ module:
   hugoVersion:
     extended: true
     min: 0.166.0
+
+# Remote downloads (the app's CHANGELOG.md for /blog/release/, GitHub stars)
+# are cached; refresh them hourly so new releases show up without clearing
+# the cache by hand.
+caches:
+  getresource:
+    maxAge: 1h
