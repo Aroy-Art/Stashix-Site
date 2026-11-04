@@ -20,11 +20,15 @@ nobody can find their way around. Stashix keeps your files where they are and
 builds a library on top of them:
 
 - **Read in the browser.** The built-in reader for comics and manga saves
-  your place on every page, per user.
+  your place on every page, per user, and has a long-strip mode for webtoons.
 - **Folder watching.** Drop a file into a watched folder and it appears in the
   library a few seconds later.
 - **Metadata from your files.** Series, issue numbers, creators and publishers
   come from `ComicInfo.xml`, `MetronInfo.xml`, sidecar files and filenames.
+- **Series and issue matching.** Stashix identifies each series and issue
+  against Metron, Comic Vine and the Grand Comics Database, and fills in
+  credits, summaries, story arcs and more. Confident matches are applied on
+  their own; anything unclear waits for you in a review queue.
 - **Full-text search** across titles, series and publishers.
 - **Accounts for the household.** Admin and user roles, per-library
   permissions and age-gates.
@@ -52,7 +56,7 @@ shows how to lay out your folders so series group correctly.
 ## What's next
 
 Stashix is early: the first release,
-[0.0.1](/blog/release/0.0.1/), is being prepared. On the roadmap are external metadata sources,
-more formats, a webtoon reading mode and reading lists. Follow along, report
-bugs or ask questions on [GitHub](https://github.com/aroy-art/stashix).
+[0.0.1](/blog/release/0.0.1/), is being prepared. On the roadmap are more
+formats, more metadata sources and reading lists. Follow along, report bugs
+or ask questions on [GitHub](https://github.com/aroy-art/stashix).
 Stashix is free and open source under the AGPL-3.0.
