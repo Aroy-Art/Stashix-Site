@@ -143,13 +143,18 @@
   width: auto;
 }
 
-/* Open-book mark beside the wordmark (navbar, phone subnav, sidebar) */
+/* Open-book mark beside the wordmark (navbar, phone subnav, sidebar).
+   The wordmark's letters (with their drop shadow) span y 13.2–40.1 of its
+   46-unit viewBox, so at 32px the text is ~19px tall and sits ~2.5px below
+   the box's centre.
+   Match that height and nudge the mark down to share the text's centre. */
 .td-stashix-mark,
 .td-shell-sidebar__brand img.td-stashix-mark {
   display: block;
-  height: 32px;
+  height: 19px;
   width: auto;
   flex-shrink: 0;
+  transform: translateY(2.5px);
 }
 .td-shell-subnav__brand,
 .td-shell-sidebar__brand {
