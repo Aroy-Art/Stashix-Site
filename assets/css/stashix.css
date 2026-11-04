@@ -361,3 +361,13 @@
 .td-shell-chrome--hero .td-site-header::after {
   content: none;
 }
+
+/* ── Hero on narrow screens: OINK hides media below 900px; stack it instead ─ */
+@media (max-width: 900px) {
+  .td-landing-hero .td-landing-hero__media.td-hero-slideshow {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 36px 0 0;
+  }
+}
