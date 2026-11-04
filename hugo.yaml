@@ -56,6 +56,7 @@ params:
   # Default link-preview image (og:image / twitter:image) for pages without
   # their own `images` front matter.
   images: [images/hero/hero-home.png]
+  images_alt: Stashix home screen with a continue-reading banner and rows of comic covers
 
 module:
   imports:
