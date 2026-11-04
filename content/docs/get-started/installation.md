@@ -57,7 +57,8 @@ This guide runs Stashix and its PostgreSQL database with Docker Compose. Check
    ```
 
    The first start pulls the images and creates the database, which can take a
-   minute.
+   minute. The Stashix image comes from the GitHub Container Registry as
+   `ghcr.io/aroy-art/stashix`.
 
 1. ### Finish setup in the browser {#setup}
 
