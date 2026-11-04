@@ -1,112 +1,70 @@
-# OINK Starter
+# Stashix Site
 
-A small, production-ready skeleton for open-source project sites built with [OINK](https://oink.pgsty.com/) and Hugo. It ships with English, Simplified Chinese, and French home pages; Blog, Docs, and Book content; and deployment workflows for GitHub Pages and Cloudflare Pages.
+Source for [stashix.net](https://stashix.net/): the documentation, guides and
+release notes for [Stashix](https://github.com/aroy-art/stashix), a self-hosted
+comic book and ebook library.
 
-No OINK documentation, analytics account, comment repository, regression suite, or project-specific brand is included. Google Analytics and Giscus stay fully commented until you configure them.
+The site is built with [Hugo](https://gohugo.io/) and the
+[OINK](https://oink.pgsty.com/) theme, and deployed to Cloudflare Pages.
 
-## Use this template
+## Run it locally
 
-Select **Use this template** on GitHub, create your repository, then run three commands:
-
-```bash
-git clone https://github.com/YOU/YOUR-REPOSITORY.git
-cd YOUR-REPOSITORY
-hugo server
-```
-
-Open <http://localhost:1313/>. The first run downloads the pinned OINK Hugo Module (`v1.4.0`). You only need Git, Go 1.27.3 or newer, and Hugo Extended 0.168.0 or newer — no external Sass, Node.js, or npm installation is required.
-
-Cloning this original template is also exactly three commands:
+You need Git, Go 1.27.3 or newer, and Hugo Extended 0.168.0. No Node.js or
+external Sass compiler is required.
 
 ```bash
-git clone https://github.com/pgsty/oink-starter.git
-cd oink-starter
-hugo server
+git clone https://github.com/Aroy-Art/Stashix-Site.git
+cd Stashix-Site
+make serve
 ```
 
-## Make it yours
+Open <http://localhost:1313/>. The first run downloads the pinned OINK Hugo
+Module (`v1.4.0`).
 
-The default site works unchanged. For a real project, start with only these edits:
+`make build` writes a production build to `public/`. Hugo prints a LibSass
+deprecation warning from the theme; it is expected.
 
-1. Change `Project Name` and `https://example.org/` at the top of `hugo.yaml`.
-2. Replace the three compact home-page files under `data/home/`.
-3. Rewrite or delete the sample pages under `content/`.
-
-The title uses one YAML anchor, so one edit changes all three languages. Navigation lives with each section’s translated `_index` page; renaming a section does not require editing a second menu tree. Replace `assets/icons/logo.svg` and `static/favicon.svg` only when you have real project artwork.
-
-Common optional settings are already organized and commented in `hugo.yaml`: repository links, Giscus, Google Analytics, accent color, typography, image zoom, sharing, and feedback. Uncomment a complete block only when you are ready to operate that integration.
-
-## Content map
+## Where things live
 
 ```text
 content/
 ├── blog/
-│   ├── post/          articles
-│   ├── design/        design notes and decisions
-│   └── release/       release announcements
-├── docs/
-│   ├── introduction/
-│   ├── get-started/
-│   ├── tutorial/
-│   └── reference/
-└── book/              a short tutorial about this starter
+│   ├── post/          news and write-ups
+│   └── release/       generated from the app's CHANGELOG.md
+└── docs/
+    ├── get-started/   overview and installation
+    ├── admin-guide/   running a Stashix server
+    └── reference/     configuration
+data/home/en.yaml      home page sections
+layouts/               overrides of OINK partials
+assets/css/stashix.css Stashix colours and component styles
+static/images/         screenshots
 ```
 
-English files end in `.md`; their Chinese and French peers end in `.zh.md` and `.fr.md`. Keep translated files side by side and keep explicit heading IDs aligned.
+Release pages are not written by hand. `content/blog/release/_content.gotmpl`
+downloads the app's `CHANGELOG.md` at build time and makes one page per
+version. Downloads are cached for an hour (see `caches` in `hugo.yaml`).
 
-## Language profiles
+## Deployment
 
-The root `hugo.yaml` enables English, Chinese, and French. Two copy-ready alternatives are included:
+`.github/workflows/cloudflare-pages.yaml` builds and deploys on every push to
+`main`. It needs these repository settings:
 
-```bash
-cp examples/hugo.single.yaml hugo.yaml     # English only
-cp examples/hugo.bilingual.yaml hugo.yaml  # English + Chinese
-```
+| Kind | Name | Value |
+|---|---|---|
+| Variable | `CLOUDFLARE_PAGES_ENABLED` | `true` |
+| Variable | `CLOUDFLARE_PROJECT_NAME` | `stashix-site` |
+| Variable | `CLOUDFLARE_SITE_URL` | `https://stashix.net/` |
+| Secret | `CLOUDFLARE_API_TOKEN` | Pages edit token |
+| Secret | `CLOUDFLARE_ACCOUNT_ID` | Cloudflare account ID |
 
-The profiles keep unused languages declared but disabled, so Hugo recognizes their suffixes and safely ignores their content. Restore the three-language configuration from Git before switching profiles again.
+## Contributing
 
-## Build
-
-Preview while writing:
-
-```bash
-hugo server
-```
-
-Run the production build locally before deploying:
-
-```bash
-hugo --cleanDestinationDir --gc --minify --environment production \
-  --printPathWarnings
-```
-
-Generated `public/`, `resources/`, and caches are ignored by Git. Because Hugo uses its built-in LibSass compiler, the upstream LibSass deprecation warning is expected — keep warnings visible for review, and do not enable `--panicOnWarning` or `HUGO_PANICONWARNING`.
-
-## GitHub Pages
-
-1. Open **Settings → Pages** and choose **GitHub Actions** as the source.
-2. Push `main`, or run **Deploy to GitHub Pages** manually from the Actions tab.
-
-`.github/workflows/github-pages.yaml` installs Go 1.27.3 and Hugo Extended 0.168.0, performs a production build, calculates the correct GitHub project subpath, and publishes the artifact through the Pages deployment API.
-
-## Cloudflare Pages
-
-The Cloudflare workflow uses Direct Upload so the same production build runs in GitHub Actions.
-
-1. Create a Cloudflare Pages **Direct Upload** project. Use the repository name as the project name, or set a repository variable named `CLOUDFLARE_PROJECT_NAME`.
-2. Add repository secrets `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN`. The token needs **Account → Cloudflare Pages → Edit**.
-3. Run **Deploy to Cloudflare Pages** manually once. To deploy every push to `main`, add the repository variable `CLOUDFLARE_PAGES_ENABLED=true`.
-
-The default canonical address is `https://<project>.pages.dev/`. Set `CLOUDFLARE_SITE_URL` to a custom production URL when you attach a domain.
-
-Cloudflare Git integration is a separate deployment mode. Use either Git integration or this Direct Upload workflow for a given Pages project, not both.
-
-## Pre-launch checklist
-
-After your deployment workflow succeeds, open `/`, `/zh/`, and `/fr/` and check representative Blog, Docs, and Book pages on both desktop and mobile viewports.
+Corrections and new pages are welcome. Commits must be signed off
+(`git commit -s`) under the
+[Developer Certificate of Origin](https://developercertificate.org/).
 
 ## License
 
-MIT. Replace the generic copyright line when adopting the template.
-
-For OINK theme development with a sibling checkout, use `make dev` (or `make dev THEME_DIR=/path/to/oink`). `make serve` and `make build` explicitly use the published module pin.
+The site source and content are released under the [MIT License](LICENSE).
+Stashix itself is licensed under the AGPL-3.0.

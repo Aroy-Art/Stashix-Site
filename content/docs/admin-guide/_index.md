@@ -1,6 +1,6 @@
 ---
 title: Admin Guide
-description: Set up libraries, manage users, configure permissions, and keep Stashix running.
+description: Run and maintain a Stashix server.
 weight: 25
 icon: fa-solid fa-screwdriver-wrench
 menus:
@@ -12,4 +12,4 @@ menus:
       icon: fa-solid fa-screwdriver-wrench
 ---
 
-Everything an administrator needs: libraries, the scanner, users, permissions, and server configuration.
+Run and maintain a Stashix server. Start with the [scanner](scanner/): how Stashix finds your files and how to lay out your library folders.

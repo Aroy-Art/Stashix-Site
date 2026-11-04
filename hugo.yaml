@@ -53,6 +53,10 @@ params:
 
   logo: icons/logo.svg
 
+  # Default link-preview image (og:image / twitter:image) for pages without
+  # their own `images` front matter.
+  images: [images/hero/hero-home.png]
+
 module:
   imports:
     - path: github.com/pgsty/oink
