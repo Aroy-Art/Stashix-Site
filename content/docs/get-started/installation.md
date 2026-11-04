@@ -5,7 +5,7 @@ weight: 10
 ---
 
 This guide runs Stashix and its PostgreSQL database with Docker Compose. Check
-[what you need before installing](../#requirements) first.
+[what you need before installing](/docs/get-started/#requirements) first.
 
 ## Install {#install}
 
