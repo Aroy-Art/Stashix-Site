@@ -10,5 +10,10 @@ dev:
 serve:
 	env -u HUGO_MODULE_REPLACEMENTS GOWORK=off HUGO_MODULE_WORKSPACE=off $(HUGO) server --bind $(BIND) --port $(PORT)
 
-build:
+build: node_modules
 	env -u HUGO_MODULE_REPLACEMENTS GOWORK=off HUGO_MODULE_WORKSPACE=off $(HUGO) --cleanDestinationDir --gc --minify --environment production --printPathWarnings
+	node scripts/purge-css.mjs public
+
+node_modules: package.json package-lock.json
+	npm ci
+	@touch node_modules

@@ -1,0 +1,12 @@
+{
+  "name": "stashix-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "purge-css": "node scripts/purge-css.mjs public"
+  },
+  "devDependencies": {
+    "postcss": "8.5.32",
+    "purgecss": "8.0.0"
+  }
+}

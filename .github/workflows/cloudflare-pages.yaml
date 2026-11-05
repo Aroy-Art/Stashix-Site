@@ -15,6 +15,7 @@ concurrency:
 
 env:
   GO_VERSION: 1.27.3
+  NODE_VERSION: "24"
   HUGO_VERSION: "0.168.0"
   GOWORK: off
   HUGO_MODULE_WORKSPACE: off
@@ -41,6 +42,15 @@ jobs:
           check-latest: true
           cache-dependency-path: go.sum
 
+      - name: Set up Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install Node dependencies
+        run: npm ci
+
       - name: Install Hugo Extended
         uses: peaceiris/actions-hugo@v3
         with:
@@ -50,6 +60,7 @@ jobs:
       - name: Record build tool versions
         run: |
           go version
+          node --version
           hugo version
 
       - name: Resolve deployment settings
@@ -71,6 +82,9 @@ jobs:
           hugo --cleanDestinationDir --gc --minify --environment production \
             --printPathWarnings \
             --baseURL "${CF_SITE_URL}"
+
+      - name: Remove unused CSS
+        run: node scripts/purge-css.mjs public
 
       - name: Deploy
         id: deploy

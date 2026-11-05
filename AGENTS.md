@@ -7,6 +7,11 @@ Keep CI and local builds on this baseline. Do not enable `--panicOnWarning`
 or `HUGO_PANICONWARNING`; keep warnings visible and review them. The upstream
 LibSass deprecation warning is accepted. No external Sass compiler is required.
 
+Production builds (`make build`, CI) run `scripts/purge-css.mjs` on `public/`
+after Hugo to drop unused CSS and refresh the stylesheet SRI hashes; this needs
+Node and `npm ci`. If a style goes missing in production only, safelist the
+class there (runtime-built class names are the usual cause).
+
 ## Git 内容与大文件规则
 
 用户于 2026-10-10 明确的通用仓库规则：
