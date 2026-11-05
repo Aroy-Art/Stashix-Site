@@ -122,10 +122,30 @@
     {{- /* Crossfade slideshow — images fade every 4 s driven by hero-slideshow.js */ -}}
     <div class="td-landing-hero__media td-hero-slideshow"{{ with $imageAlt }} role="img" aria-label="{{ . | markdownify | plainify }}"{{ else }} aria-hidden="true"{{ end }}>
       {{- range $idx, $src := $slideshow }}
+      {{- /* static/images/hero is also mounted into assets/ (hugo.yaml) so the
+             slides ship as resized WebP; the PNGs stay public for og:image. */ -}}
+      {{- with $img := resources.Get $src }}
+        {{- $srcset := slice }}
+        {{- range $w := slice 640 960 1280 1920 }}
+          {{- if le $w $img.Width }}
+            {{- $r := $img.Process (printf "resize %dx webp q80 photo" $w) }}
+            {{- $srcset = $srcset | append (printf "%s %dw" $r.RelPermalink $w) }}
+          {{- end }}
+        {{- end }}
+        {{- $fallback := $img.Process "resize 960x webp q80 photo" }}
+      <img src="{{ $fallback.RelPermalink }}"
+           srcset="{{ delimit $srcset ", " }}"
+           sizes="(max-width: 900px) 100vw, 55vw"
+           width="{{ $img.Width }}" height="{{ $img.Height }}"
+           class="td-hero-slide{{ if eq $idx 0 }} td-hero-slide--active{{ end }}"
+           alt=""
+           {{ if eq $idx 0 }}fetchpriority="high"{{ else }}loading="lazy"{{ end }}>
+      {{- else }}
       <img src="{{ $src | relURL }}"
            class="td-hero-slide{{ if eq $idx 0 }} td-hero-slide--active{{ end }}"
            alt=""
-           loading="{{ if eq $idx 0 }}eager{{ else }}lazy{{ end }}">
+           {{ if eq $idx 0 }}fetchpriority="high"{{ else }}loading="lazy"{{ end }}>
+      {{- end }}
       {{- end }}
     </div>
     {{- else if and $imageLight $imageDark }}

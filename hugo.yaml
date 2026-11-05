@@ -61,6 +61,11 @@ params:
 module:
   imports:
     - path: github.com/pgsty/oink
+  mounts:
+    # Declaring any assets mount drops the default one, so restate it.
+    - { source: assets, target: assets }
+    # Hero slides: processed into resized WebP by the landing hero partial.
+    - { source: static/images/hero, target: assets/images/hero }
   hugoVersion:
     extended: true
     min: 0.166.0
