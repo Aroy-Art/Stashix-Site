@@ -1,4 +1,8 @@
-# Stashix Site
+<h1 align="center">
+  <img src="assets/icons/logo.svg" alt="" height="96">
+  <br>
+  <img src="assets/icons/wordmark.svg" alt="Stashix" height="64">
+</h1>
 
 Source for [stashix.net](https://stashix.net/): the documentation, guides and
 release notes for [Stashix](https://github.com/aroy-art/stashix), a self-hosted
