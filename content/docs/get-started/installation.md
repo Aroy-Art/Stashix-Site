@@ -189,8 +189,15 @@ can write to `LIBRARIES_PATH` and that the library isn't mounted with `:ro`. See
 files are imported. See [How the scanner works](/docs/admin-guide/scanner/how-it-works/)
 and [File structure](/docs/admin-guide/scanner/file-structure/).
 
-**`docker compose up` refuses to start.** A required secret is empty. The
-error names it, for example `set STASHIX_ENCRYPTION_KEY in .env`.
+**`docker compose up` refuses to start.** A required setting is empty. The
+error names it, for example `set STASHIX_ENCRYPTION_KEY in .env` or
+`set POSTGRES_PASSWORD in .env`.
+
+**Stashix logs `password authentication failed for user "stashix"`.** The
+database keeps the password it was first created with, so changing
+`POSTGRES_PASSWORD` in `.env` later doesn't change it. Put the original
+password back. If you set `DATABASE_URL` yourself, check that it uses the
+same password.
 
 **Stashix exits saying `STASHIX_ENCRYPTION_KEY` is not valid base64 or must
 decode to 32 bytes.** The key was mistyped or generated with the wrong length.
