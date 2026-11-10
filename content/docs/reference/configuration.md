@@ -81,7 +81,7 @@ the rescan.
 | `PORT` | `4000` | HTTP port inside the container. To reach Stashix on another port, change the `ports` mapping in `docker-compose.yml` instead. |
 | `DNS_CLUSTER_QUERY` | none | DNS query used to find other nodes when clustering. |
 
-Prometheus metrics are served on a separate port, `9568`, at `/metrics`.
+Prometheus metrics are served on a separate port, `9568`, at `/metrics`. See [Monitoring](/docs/admin-guide/monitoring/).
 
 ## Settings Compose doesn't pass through {#compose}
 
