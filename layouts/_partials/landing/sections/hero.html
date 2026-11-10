@@ -120,8 +120,16 @@
     </div>
     {{- if $slideshow }}
     {{- /* Crossfade slideshow — images fade every 4 s driven by hero-slideshow.js */ -}}
-    <div class="td-landing-hero__media td-hero-slideshow"{{ with $imageAlt }} role="img" aria-label="{{ . | markdownify | plainify }}"{{ else }} aria-hidden="true"{{ end }}>
-      {{- range $idx, $src := $slideshow }}
+    {{- /* A slide is a path, or a map with `src` and `alt`. With slide alts the
+           images describe themselves; otherwise the wrapper uses image.alt or
+           is hidden from assistive tech as decoration. */ -}}
+    {{- $slideAlts := false }}
+    {{- range $slideshow }}{{ if and (reflect.IsMap .) .alt }}{{ $slideAlts = true }}{{ end }}{{ end }}
+    <div class="td-landing-hero__media td-hero-slideshow"{{ if $slideAlts }}{{ else if $imageAlt }} role="img" aria-label="{{ $imageAlt | markdownify | plainify }}"{{ else }} aria-hidden="true"{{ end }}>
+      {{- range $idx, $slide := $slideshow }}
+      {{- $src := $slide }}
+      {{- $alt := "" }}
+      {{- if reflect.IsMap $slide }}{{ $src = $slide.src }}{{ $alt = $slide.alt | default "" }}{{ end }}
       {{- /* static/images/hero is also mounted into assets/ (hugo.yaml) so the
              slides ship as resized WebP; the PNGs stay public for og:image. */ -}}
       {{- with $img := resources.Get $src }}
@@ -138,12 +146,12 @@
            sizes="(max-width: 900px) 100vw, 55vw"
            width="{{ $img.Width }}" height="{{ $img.Height }}"
            class="td-hero-slide{{ if eq $idx 0 }} td-hero-slide--active{{ end }}"
-           alt=""
+           alt="{{ $alt }}"
            {{ if eq $idx 0 }}fetchpriority="high"{{ else }}loading="lazy"{{ end }}>
       {{- else }}
       <img src="{{ $src | relURL }}"
            class="td-hero-slide{{ if eq $idx 0 }} td-hero-slide--active{{ end }}"
-           alt=""
+           alt="{{ $alt }}"
            {{ if eq $idx 0 }}fetchpriority="high"{{ else }}loading="lazy"{{ end }}>
       {{- end }}
       {{- end }}

@@ -9,8 +9,10 @@ hero:
     - { label: Get started, url: docs/get-started/, icon: fa-solid fa-rocket, style: primary }
     - { label: View on GitHub, url: "https://github.com/aroy-art/stashix", icon: fa-brands fa-github, style: ghost, external: true }
   slideshow:
-    - images/hero/hero-home.png
-    - images/hero/hero-reader.png
+    - src: images/hero/hero-home.png
+      alt: Stashix home screen with a continue-reading banner and rows of comic covers
+    - src: images/hero/hero-reader.png
+      alt: Stashix series page for Akira, with its covers, reading progress across 38 issues, a summary and credits
   media:
     ratio: 1fr 1.2fr
 

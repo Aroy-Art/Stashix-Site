@@ -11,11 +11,23 @@
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 {{- /* Link-preview image details that Hugo's built-in OpenGraph and Twitter
      templates leave out: size, type and alt text. Uses the page's first
-     `images` entry, else site params.images (both are paths in static/).
+     `images` entry (a path in static/), else site params.images. The site
+     default is built here from the home hero screenshot at 1200x630, the
+     size social sites expect, rather than kept as a second copy in static/.
      Alt text comes from `images_alt` in front matter or site params. */ -}}
+{{- $siteOGPath := index site.Params.images 0 -}}
+{{- $siteOG := false -}}
+{{- with resources.Get "images/hero/hero-home.png" }}
+  {{- $siteOG = .Process "fill 1200x630 center jpg q85" | resources.Copy $siteOGPath -}}
+  {{- $siteOG.Publish -}}
+{{- end -}}
 {{- with index (.Params.images | default site.Params.images) 0 }}
   {{- $file := path.Join "static" . }}
-  {{- if fileExists $file }}
+  {{- if and $siteOG (eq . $siteOGPath) }}
+<meta property="og:image:width" content="{{ $siteOG.Width }}">
+<meta property="og:image:height" content="{{ $siteOG.Height }}">
+<meta property="og:image:type" content="{{ $siteOG.MediaType.Type }}">
+  {{- else if fileExists $file }}
     {{- with images.Config $file }}
 <meta property="og:image:width" content="{{ .Width }}">
 <meta property="og:image:height" content="{{ .Height }}">

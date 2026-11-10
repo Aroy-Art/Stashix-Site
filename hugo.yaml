@@ -67,8 +67,9 @@ params:
   logo: icons/logo.svg
 
   # Default link-preview image (og:image / twitter:image) for pages without
-  # their own `images` front matter.
-  images: [images/hero/hero-home.png]
+  # their own `images` front matter. Generated at build time from the home
+  # hero screenshot by layouts/_partials/hooks/head-end.html.
+  images: [images/og/stashix.jpg]
   images_alt: Stashix home screen with a continue-reading banner and rows of comic covers
 
 module:
