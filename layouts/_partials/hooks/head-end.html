@@ -18,3 +18,49 @@
 <meta name="twitter:image:alt" content="{{ . }}">
   {{- end }}
 {{- end }}
+{{- /* Schema.org JSON-LD. Every page gets the Organization node; the home page
+     adds WebSite and SoftwareApplication, other pages a BreadcrumbList, and
+     docs and blog pages a TechArticle or BlogPosting. Dates are only emitted
+     when the page has them. */ -}}
+{{- $home := site.Home.Permalink -}}
+{{- $orgRef := dict "@id" (printf "%s#org" $home) -}}
+{{- $repo := site.Params.github_project_repo -}}
+{{- $org := dict "@type" "Organization" "@id" (printf "%s#org" $home) "name" site.Title "url" $home "sameAs" (slice $repo) -}}
+{{- with resources.Get "icons/logo.png" }}{{ $org = merge $org (dict "logo" .Permalink) }}{{ end -}}
+{{- $graph := slice $org -}}
+{{- $image := absURL (index (.Params.images | default site.Params.images) 0) -}}
+{{- $desc := partial "page-description.html" . | strings.TrimSpace -}}
+{{- if .IsHome -}}
+  {{- $graph = $graph | append (dict
+        "@type" "WebSite" "@id" (printf "%s#website" $home) "url" $home
+        "name" site.Title "description" $desc "inLanguage" site.Language.Locale
+        "publisher" $orgRef) -}}
+  {{- $graph = $graph | append (dict
+        "@type" "SoftwareApplication" "@id" (printf "%s#app" $home) "url" $home
+        "name" site.Title "description" $desc "image" $image
+        "applicationCategory" "MultimediaApplication" "operatingSystem" "Linux (Docker)"
+        "license" "https://www.gnu.org/licenses/agpl-3.0.html"
+        "isAccessibleForFree" true
+        "offers" (dict "@type" "Offer" "price" "0" "priceCurrency" "USD")
+        "publisher" $orgRef "sameAs" (slice $repo)) -}}
+{{- else if in (slice "page" "section") .Kind -}}
+  {{- $crumbs := slice -}}
+  {{- range .Ancestors.Reverse -}}
+    {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" (add (len $crumbs) 1) "name" .LinkTitle "item" .Permalink) -}}
+  {{- end -}}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" (add (len $crumbs) 1) "name" .LinkTitle "item" .Permalink) -}}
+  {{- $graph = $graph | append (dict "@type" "BreadcrumbList" "itemListElement" $crumbs) -}}
+  {{- $type := "" -}}
+  {{- if eq .Section "docs" }}{{ $type = "TechArticle" }}{{ else if and (eq .Section "blog") (eq .Kind "page") }}{{ $type = "BlogPosting" }}{{ end -}}
+  {{- with $type -}}
+    {{- $article := dict
+          "@type" . "@id" (printf "%s#article" $.Permalink) "mainEntityOfPage" $.Permalink
+          "headline" $.Title "description" $desc "image" $image
+          "inLanguage" site.Language.Locale "author" $orgRef "publisher" $orgRef
+          "about" (dict "@id" (printf "%s#app" $home)) -}}
+    {{- with $.Date }}{{ if not .IsZero }}{{ $article = merge $article (dict "datePublished" (.Format "2006-01-02T15:04:05Z07:00")) }}{{ end }}{{ end -}}
+    {{- with $.Lastmod }}{{ if not .IsZero }}{{ $article = merge $article (dict "dateModified" (.Format "2006-01-02T15:04:05Z07:00")) }}{{ end }}{{ end -}}
+    {{- $graph = $graph | append $article -}}
+  {{- end -}}
+{{- end }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" $graph | jsonify | safeJS }}</script>
