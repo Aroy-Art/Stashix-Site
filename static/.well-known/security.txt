@@ -1,0 +1,8 @@
+# Security contact for Stashix and stashix.net (RFC 9116).
+# Renew Expires before it passes; it must stay less than a year ahead.
+Contact: https://github.com/aroy-art/stashix/security/advisories/new
+Contact: mailto:security@stashix.net
+Expires: 2027-11-01T00:00:00Z
+Preferred-Languages: en
+Canonical: https://stashix.net/.well-known/security.txt
+Policy: https://stashix.net/docs/contributing/security/
