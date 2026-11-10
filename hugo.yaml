@@ -13,7 +13,7 @@ languages:
     weight: 1
     title: *siteTitle
     params:
-      description: Self-hosted comic book and ebook library. Documentation, guides, and release notes.
+      description: Free, open-source, self-hosted comic and manga library. Read CBZ, CBR and CB7 in your browser, plus PDF and EPUB as page images, with automatic metadata matching.
 
 markup:
   goldmark:
@@ -48,8 +48,11 @@ params:
     backlinks: true
     theme_color: '#7c3aed'
 
-  github_repo: https://github.com/aroy-art/stashix
+  # This site's repo: page "Edit this page" / "View page source" links.
+  github_repo: https://github.com/Aroy-Art/Stashix-Site
   github_branch: main
+  # The app's repo: navbar GitHub link and JSON-LD codeRepository/sameAs.
+  github_project_repo: https://github.com/aroy-art/stashix
 
   logo: icons/logo.svg
 
