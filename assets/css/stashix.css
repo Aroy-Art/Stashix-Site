@@ -539,3 +539,33 @@
     line-height: 1.45;
   }
 }
+
+/* ── Touch targets: 44px on touch screens ─────────────────────────────────── */
+@media (pointer: coarse) {
+  .td-shell-iconbtn,
+  .td-page-actions__primary,
+  .td-page-actions__toggle {
+    min-width: 44px;
+    min-height: 44px;
+  }
+  .td-pager__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+}
+
+/* The phone header has room for three 32px-wide buttons beside the wordmark
+   (not 44px), so make them full header height and close the gaps between
+   them: one continuous touch strip, unchanged icons. */
+@media (pointer: coarse) and (max-width: 991.98px) {
+  .td-site-header .td-nav-util-zone {
+    gap: 0;
+  }
+  .td-nav-util-zone .td-nav-search-box,
+  .td-nav-util-zone .td-nav-util {
+    justify-content: center;
+    min-width: 32px;
+    min-height: 44px;
+  }
+}
