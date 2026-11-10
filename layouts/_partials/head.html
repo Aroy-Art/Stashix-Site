@@ -115,7 +115,7 @@
 
 {{/* Every baseof template records the format in the page store before head is
 rendered, so read that instead of re-deriving it from the output-format lists. */ -}}
-{{ if and hugo.IsProduction (ne $outputFormat "print") (ne .Site.Language.Name "xx") (in (slice "taxonomy" "term" "404") .Kind) -}}
+{{ if and hugo.IsProduction (ne $outputFormat "print") (ne .Site.Language.Name "xx") (or (in (slice "taxonomy" "term" "404") .Kind) .Params.noindex) -}}
 <meta name="robots" content="noindex, follow">
 {{ else if and hugo.IsProduction (ne $outputFormat "print") (ne .Site.Language.Name "xx") -}}
 <meta name="robots" content="index, follow">
@@ -127,7 +127,8 @@ rendered, so read that instead of re-deriving it from the output-format lists. *
 {{- /* Stashix override of OINK v1.4.0 head.html. Changes from the theme:
      `seo_title` front matter, when set, replaces the whole <title> (the theme
      always uses the bare site title on the home page); and above, taxonomy,
-     term and 404 pages get noindex, with no canonical on the 404 page. Re-copy
+     term and 404 pages, and pages with `noindex: true`, get noindex, with no
+     canonical on the 404 page. Re-copy
      this file when upgrading OINK and reapply them. */ -}}
 <title>
   {{- if .Params.seo_title -}}

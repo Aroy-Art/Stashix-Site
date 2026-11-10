@@ -64,12 +64,21 @@
   {{- end -}}
 
   {{- $params := dict "version" $version "released" (gt (len $released) 0) -}}
+  {{- /* Unreleased notes may still change: keep them out of search (head.html
+         reads `noindex`). Released pages get the sitemap defaults; without an
+         explicit priority, content-adapter pages emit <priority>0</priority>. */ -}}
+  {{- $sitemap := dict "priority" -1 -}}
+  {{- if not $released -}}
+    {{- $params = merge $params (dict "noindex" true) -}}
+    {{- $sitemap = dict "disable" true -}}
+  {{- end -}}
   {{- with $summary }}{{ $params = merge $params (dict "description" .) }}{{ end -}}
   {{- $page := dict
     "path" (urlize $version)
     "title" (printf "Stashix %s" $version)
     "content" (dict "mediaType" "text/markdown" "value" $content)
     "params" $params
+    "sitemap" $sitemap
   -}}
   {{- with $summary }}{{ $page = merge $page (dict "summary" .) }}{{ end -}}
   {{- if $released }}{{ $page = merge $page (dict "date" $when) }}{{ end -}}
