@@ -75,6 +75,41 @@ The publisher is only inferred at import time for new books. Renaming the folder
 
 ---
 
+## Full example
+
+A library that combines all of the above: publisher folders, ongoing and finished series, one-shots, and cover images.
+
+```
+/comics/                                         ← library root
+├── Massive Publishing/                          ← publisher
+│   └── The Disavowed (2025-)/                   ← series, started 2025, ongoing
+│       ├── The Disavowed 001 (2025) (digital).cbz   ← issue 1, 2025
+│       ├── The Disavowed 002 (2025) (digital).cbz
+│       └── The Disavowed 003 (2026) (digital).cbz
+├── TOKYOPOP/                                    ← publisher
+│   └── One-Shot/                                ← standalone folder
+│       └── NOiSE (2007).cbz                     ← standalone book, 2007
+└── Viz Graphic Novels/                          ← publisher
+    ├── AD Police (1994)/                        ← series, 1994
+    │   ├── cover.jpg                            ← series cover
+    │   ├── AD Police (1994) - Chapter 1.cbz
+    │   ├── AD Police (1994) - Chapter 1.jpg     ← cover for chapter 1
+    │   └── AD Police (1994) - Chapter 2.cbz
+    ├── Ashen Victor (1997)/                     ← series, 1997
+    │   ├── cover.jpg                            ← series cover
+    │   ├── Ashen Victor (1997) v01 c1.cbz
+    │   └── Ashen Victor (1997) v01 c2.cbz
+    └── Battle Angel Alita (1994-1998)/          ← series, 1994 to 1998, finished
+        ├── Issue 1 - Rusty Angel (1994).cbz     ← issue 1, title "Rusty Angel"
+        ├── Issue 1 - Rusty Angel (1994).jpg     ← cover for issue 1
+        ├── Issue 2 - Tears of an Angel (1994).cbz
+        └── Issue 2 - Tears of an Angel (1994).jpg
+```
+
+**Cover images** are optional. A `cover.jpg` (or `.jpeg`, `.png`, `.webp`) in a series folder is used as the series cover. An image with the same name as a book file, such as `Issue 1 - Rusty Angel (1994).jpg`, is used as that book's cover instead of one generated from the file. Other images in the folder are ignored.
+
+---
+
 ## Metadata precedence
 
 Within a single file, Stashix merges metadata from multiple sources. The order of precedence, highest first:
