@@ -55,8 +55,8 @@ shows how to lay out your folders so series group correctly.
 
 ## What's next
 
-Stashix is early: the first release,
-[0.0.1](/blog/release/0.0.1/), is being prepared. On the roadmap are more
-formats, more metadata sources and reading lists. Follow along, report bugs
+Stashix is early: the first release, [0.0.1](/blog/release/0.0.1/), is out
+now. On the roadmap are more formats, more metadata sources, reading lists,
+and translation and localization of the interface. Follow along, report bugs
 or ask questions on [GitHub](https://github.com/aroy-art/stashix).
 Stashix is free and open source under the AGPL-3.0.
