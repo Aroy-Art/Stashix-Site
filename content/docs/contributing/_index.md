@@ -24,8 +24,9 @@ For a bug, include your Stashix version, how you installed it, what you did,
 and what happened instead. The server log (`docker compose logs stashix`)
 usually helps.
 
-Don't report security problems in a public issue. See
-[Reporting security issues](security/).
+> [!WARNING]
+> Don't report security problems in a public issue. See
+> [Reporting security issues](security/).
 
 ## Improve the documentation {#docs}
 
