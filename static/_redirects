@@ -1,0 +1,5 @@
+# Cloudflare Pages redirects.
+
+# Browsers and crawlers request /favicon.ico by default; the site only ships
+# an SVG icon.
+/favicon.ico /favicon.svg 301
