@@ -34,7 +34,6 @@ This guide runs Stashix and its PostgreSQL database with Docker Compose. Check
    set_env JWT_SECRET "$(openssl rand -base64 48)"
    set_env STASHIX_ENCRYPTION_KEY "$(openssl rand -base64 32)"
    set_env POSTGRES_PASSWORD "$DB_PASSWORD"
-   set_env DATABASE_URL "ecto://stashix:$DB_PASSWORD@db/stashix"
    ```
 
    Run them once, before the first start. On macOS, change `sed -i` to
@@ -54,8 +53,7 @@ This guide runs Stashix and its PostgreSQL database with Docker Compose. Check
    | `SECRET_KEY_BASE` | `openssl rand -base64 48` |
    | `JWT_SECRET` | `openssl rand -base64 48` (run it again for a different value) |
    | `STASHIX_ENCRYPTION_KEY` | `openssl rand -base64 32` |
-   | `POSTGRES_PASSWORD` | Any password made of letters and numbers |
-   | `DATABASE_URL` | `ecto://stashix:<password>@db/stashix`, with the same password |
+   | `POSTGRES_PASSWORD` | `openssl rand -hex 24`, or any password made of letters and numbers |
    {{< /details >}}
 
 1. ### Point Stashix at your library {#configure}

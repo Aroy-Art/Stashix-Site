@@ -16,15 +16,15 @@ live in the `.env` file next to `docker-compose.yml`. See
 | `SECRET_KEY_BASE` | none | Encrypts and signs sessions and cookies. Generate with `openssl rand -base64 48`. |
 | `JWT_SECRET` | none | Signs login tokens. Use a different value from `SECRET_KEY_BASE`. |
 | `STASHIX_ENCRYPTION_KEY` | none | Base64 32-byte key that encrypts stored metadata source credentials. Generate with `openssl rand -base64 32`. |
-| `DATABASE_URL` | `postgresql://stashix:stashix@db/stashix` | PostgreSQL connection, as `ecto://user:password@host/database`. |
+| `POSTGRES_PASSWORD` | none | Password for the bundled database. Use letters and numbers only, as it also goes into `DATABASE_URL`. Generate with `openssl rand -hex 24`. |
 | `LIBRARIES_PATH` | `./libraries` | Your media folder **on the host**, not a path inside the container. Compose mounts it read-write at `/libraries`, and each library in Stashix points at a folder under that, such as `/libraries/comics`. Read-write so metadata can be saved to your files; see [Metadata in your files](/docs/get-started/installation/#metadata-write-back). |
 
 `LIBRARIES_PATH` is used only by Docker Compose to mount the folder; Stashix
 itself never reads it. It used to be called `LIBRARY_PATH`, and `.env` files
 with the old name keep working.
 
-`docker compose up` refuses to start while `SECRET_KEY_BASE`, `JWT_SECRET` or
-`STASHIX_ENCRYPTION_KEY` is empty. Stashix also refuses to start if
+`docker compose up` refuses to start while `SECRET_KEY_BASE`, `JWT_SECRET`,
+`STASHIX_ENCRYPTION_KEY` or `POSTGRES_PASSWORD` is empty. Stashix also refuses to start if
 `STASHIX_ENCRYPTION_KEY` isn't valid base64 or doesn't decode to 32 bytes.
 
 > [!WARNING]
@@ -51,14 +51,14 @@ read the credentials it is re-encrypting. Rotate it on a later restart.
 
 ## Database {#database}
 
-These configure the bundled PostgreSQL container. Keep the user and password
-in step with `DATABASE_URL`.
+These configure the bundled PostgreSQL container. Compose builds
+`DATABASE_URL` from them, so they stay in step automatically.
 
 | Variable | Default | What it does |
 |---|---|---|
 | `POSTGRES_DB` | `stashix` | Database name. |
 | `POSTGRES_USER` | `stashix` | Database user. |
-| `POSTGRES_PASSWORD` | `stashix` | Database password. Change it. |
+| `DATABASE_URL` | built from `POSTGRES_*` | PostgreSQL connection, as `ecto://user:password@host/database`. Set it only to use a database server other than the bundled one. |
 | `POOL_SIZE` | `10` | Database connections Stashix keeps open. |
 | `ECTO_IPV6` | `false` | Set to `true` or `1` to reach the database over IPv6. |
 
