@@ -1,6 +1,6 @@
 ---
 title: Blog
-description: Posts, design notes, and release announcements.
+description: News from the Stashix project. Release announcements, design notes and write-ups about the self-hosted comic and manga server.
 type: blog
 icon: fa-solid fa-blog
 sidebar_root_for: self

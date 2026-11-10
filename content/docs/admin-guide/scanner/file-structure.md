@@ -1,5 +1,6 @@
 ---
 title: File Structure
+seo_title: Comic library folder structure for Stashix
 description: How to organise your library folders so Stashix groups books into series correctly.
 weight: 20
 ---

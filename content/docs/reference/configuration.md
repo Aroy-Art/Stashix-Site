@@ -1,5 +1,6 @@
 ---
 title: Configuration
+seo_title: "Stashix configuration: environment variables"
 description: Every environment variable Stashix reads, with defaults and what each one does.
 weight: 10
 ---

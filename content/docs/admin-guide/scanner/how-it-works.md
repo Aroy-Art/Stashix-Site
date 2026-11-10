@@ -1,5 +1,6 @@
 ---
 title: How the Scanner Works
+seo_title: "How the Stashix scanner works: formats, metadata and scans"
 description: File discovery, metadata parsing, thumbnail generation, and folder watching.
 weight: 10
 ---

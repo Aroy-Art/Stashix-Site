@@ -1,6 +1,6 @@
 ---
 title: Admin Guide
-description: Run and maintain a Stashix server.
+description: Run and maintain a Stashix server, from how the scanner imports your comics to laying out library folders so series match.
 weight: 25
 icon: fa-solid fa-screwdriver-wrench
 menus:
@@ -12,4 +12,10 @@ menus:
       icon: fa-solid fa-screwdriver-wrench
 ---
 
-Run and maintain a Stashix server. Start with the [scanner](scanner/): how Stashix finds your files and how to lay out your library folders. [Monitoring](/docs/admin-guide/monitoring/) covers Prometheus metrics and the logs that point at slow pages or proxy problems.
+Run and maintain a Stashix server once it is installed. Start with the
+[scanner](scanner/): how Stashix finds your files, reads their metadata and
+keeps the library in step with your folders, and how to lay out those folders
+so books group into the right series.
+
+For every environment variable and its default, see the
+[configuration reference](/docs/reference/configuration/). [Monitoring](/docs/admin-guide/monitoring/) covers Prometheus metrics and the logs that point at slow pages or proxy problems.

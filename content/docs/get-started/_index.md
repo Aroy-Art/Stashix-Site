@@ -1,5 +1,6 @@
 ---
 title: Get Started
+seo_title: Get started with Stashix, a self-hosted comic server
 description: What Stashix does, what it needs to run, and how to install it.
 weight: 20
 icon: fa-solid fa-rocket

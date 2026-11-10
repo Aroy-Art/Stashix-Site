@@ -1,6 +1,6 @@
 ---
 title: Reference
-description: Look up exact settings and behaviour.
+description: Stashix reference. Every environment variable and setting the server reads, with defaults, for when you know what you need.
 weight: 40
 icon: fa-solid fa-book-open
 menus:

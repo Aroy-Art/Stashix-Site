@@ -1,6 +1,6 @@
 ---
 title: Scanner
-description: How Stashix discovers, parses, and imports your library files.
+description: How the Stashix scanner finds, parses and imports your comics, and how to lay out folders and file names so series match correctly.
 weight: 10
 ---
 
