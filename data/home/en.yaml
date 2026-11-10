@@ -4,7 +4,7 @@ hero:
   align: start
   title_lines:
     - "Ready to start your next reading binge?"
-  lead: Self-hosted comic book library. CBZ, CBR and CB7 — an in-browser reader, automatic metadata matching, full-text search, and folder watching. Your collection, your server.
+  lead: Self-hosted comic and manga library. CBZ, CBR and CB7, plus PDF and EPUB as page images — an in-browser reader, automatic metadata matching, full-text search, and folder watching. Your collection, your server.
   actions:
     - { label: Get started, url: docs/get-started/, icon: fa-solid fa-rocket, style: primary }
     - { label: View on GitHub, url: "https://github.com/aroy-art/stashix", icon: fa-brands fa-github, style: ghost, external: true }
@@ -18,7 +18,7 @@ metrics:
   class: sx-band
   columns: 4
   items:
-    - { value: 3, label: Comic formats, desc: "CBZ&nbsp;· CBR&nbsp;· CB7<br>(partial support for PDF&nbsp;· EPUB)" }
+    - { value: 3, label: Comic formats, desc: "CBZ&nbsp;· CBR&nbsp;· CB7<br>(PDF&nbsp;· EPUB shown as page images)" }
     - { value: 2, label: Metadata schemas, desc: "ComicInfo.xml&nbsp;· MetronInfo.xml, matched against Metron&nbsp;· Comic&nbsp;Vine&nbsp;· GCD" }
     - { value: 5, suffix: s, label: To auto-import, desc: new files in watched folders }
     - { value: 100, suffix: "%", label: Free & open source, desc: AGPL-3.0 }

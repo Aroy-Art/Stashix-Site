@@ -32,8 +32,9 @@ shelf you can read from any browser on your network.
 - **Installable on your phone** as a progressive web app on Android.
 
 Stashix reads `.cbz`, `.cbr`, `.cb7`, `.pdf` and `.epub` files. Anything else
-in a library folder is ignored. EPUBs are shown as their images, so they work
-for manga and comics but not yet for text ebooks such as novels; see
+in a library folder is ignored. PDF pages are shown as images, without
+selectable text. EPUBs are shown as their images, so they work for manga and
+comics but not yet for text ebooks such as novels; see
 [supported formats](/docs/admin-guide/scanner/how-it-works/#supported-formats).
 
 ## How it fits together {#overview}
