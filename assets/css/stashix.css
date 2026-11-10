@@ -569,3 +569,10 @@
     min-height: 44px;
   }
 }
+
+/* ── Callouts: frame in the level colour ──────────────────────────────────── */
+/* ink resets the callout border to the neutral hairline, which leaves only the
+   faint tint to tell a warning from a note. Use the level's accent instead. */
+[data-td-preset='ink'] .td-callout {
+  border-color: var(--td-callout-accent);
+}
