@@ -1,5 +1,6 @@
 ---
 title: Installation
+seo_title: Install Stashix with Docker Compose
 description: Install Stashix with Docker Compose, from an empty folder to your first library.
 weight: 10
 ---
@@ -152,6 +153,29 @@ To keep your library untouched, mount it read-only:
 Turn the setting off first: with a read-only mount and the setting on, every
 metadata change still saves to the database, but each attempt to write the
 file fails and is logged as an error.
+
+## Update Stashix {#update}
+
+The Compose file pins Stashix to one version, for example
+`ghcr.io/aroy-art/stashix:0.0.1`, so it only changes when you change that tag.
+
+1. Read the [release notes](/blog/release/) for the new version. Before 1.0
+   the database schema can change between any two releases.
+1. Back up the database:
+
+   ```bash
+   docker compose exec db pg_dump -U stashix stashix > stashix-backup.sql
+   ```
+
+   If you changed `POSTGRES_USER` or `POSTGRES_DB` in `.env`, use those names.
+1. In `docker-compose.yml`, change the version at the end of the
+   `ghcr.io/aroy-art/stashix` image line.
+1. Pull the new image and restart:
+
+   ```bash
+   docker compose pull
+   docker compose up -d
+   ```
 
 ## If something goes wrong {#troubleshooting}
 
