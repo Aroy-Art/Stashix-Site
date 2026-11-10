@@ -63,7 +63,7 @@
     {{- $content = printf "%s\n\n[Release notes on the Stashix repository](%s)" $content . -}}
   {{- end -}}
 
-  {{- $params := dict "version" $version "released" (gt (len $released) 0) -}}
+  {{- $params := dict "version" $version "released" (gt (len $released) 0) "tags" (slice "release") -}}
   {{- /* Unreleased notes may still change: keep them out of search (head.html
          reads `noindex`). Released pages get the sitemap defaults; without an
          explicit priority, content-adapter pages emit <priority>0</priority>. */ -}}
