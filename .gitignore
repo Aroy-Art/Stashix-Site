@@ -2,5 +2,6 @@
 /resources/
 /.hugo_cache/
 /.hugo_build.lock
+/tmp/
 .DS_Store
 /node_modules/
