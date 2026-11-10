@@ -1,7 +1,9 @@
 title: &siteTitle Stashix
 baseURL: https://stashix.net/
 defaultContentLanguage: en
-enableGitInfo: false
+# Page lastmod comes from the last commit touching each file (CI checks out
+# full history), which feeds sitemap <lastmod>, JSON-LD and the docs footer.
+enableGitInfo: true
 enableRobotsTXT: true
 enableEmoji: true
 timeZone: UTC
@@ -25,6 +27,14 @@ markup:
       wrapStandAloneImageWithinParagraph: false
   highlight:
     noClasses: false
+
+# Tag and category list pages are thin while the blog has one post: keep them
+# for navigation but out of the sitemap (head.html also marks them noindex).
+cascade:
+  - target:
+      kind: '{taxonomy,term}'
+    sitemap:
+      disable: true
 
 outputs:
   home: [HTML, RSS, markdown, LLMS]

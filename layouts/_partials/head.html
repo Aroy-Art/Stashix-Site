@@ -115,17 +115,20 @@
 
 {{/* Every baseof template records the format in the page store before head is
 rendered, so read that instead of re-deriving it from the output-format lists. */ -}}
-{{ if and hugo.IsProduction (ne $outputFormat "print") (ne .Site.Language.Name "xx") -}}
+{{ if and hugo.IsProduction (ne $outputFormat "print") (ne .Site.Language.Name "xx") (in (slice "taxonomy" "term" "404") .Kind) -}}
+<meta name="robots" content="noindex, follow">
+{{ else if and hugo.IsProduction (ne $outputFormat "print") (ne .Site.Language.Name "xx") -}}
 <meta name="robots" content="index, follow">
 {{ else -}}
 <meta name="robots" content="noindex, nofollow">
 {{ end -}}
 
 {{ partialCached "favicons.html" . }}
-{{- /* Stashix override of OINK v1.4.0 head.html: the only change is that
-     `seo_title` front matter, when set, replaces the whole <title>. The theme
-     always uses the bare site title on the home page. Re-copy this file when
-     upgrading OINK and reapply the change. */ -}}
+{{- /* Stashix override of OINK v1.4.0 head.html. Changes from the theme:
+     `seo_title` front matter, when set, replaces the whole <title> (the theme
+     always uses the bare site title on the home page); and above, taxonomy,
+     term and 404 pages get noindex, with no canonical on the 404 page. Re-copy
+     this file when upgrading OINK and reapply them. */ -}}
 <title>
   {{- if .Params.seo_title -}}
     {{ .Params.seo_title -}}
@@ -137,7 +140,7 @@ rendered, so read that instead of re-deriving it from the output-format lists. *
   {{ end -}}
 </title>
 <meta name="description" content="{{ partial "page-description.html" . }}">
-{{ partial "seo-alternates.html" . -}}
+{{ if ne .Kind "404" }}{{ partial "seo-alternates.html" . }}{{ end -}}
 {{ partial "opengraph.html" . -}}
 {{ partial "schema.html" . -}}
 {{ partial "twitter_cards.html" . -}}
