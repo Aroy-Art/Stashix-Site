@@ -1,4 +1,13 @@
 {{- $css := resources.Get "css/stashix.css" | minify -}}
+{{- /* Preload the text faces on content pages. They are font-display: swap,
+     and arriving after first paint reflowed the docs text (CLS 0.13 on
+     desktop). The home page has no such shift and its LCP is the hero image,
+     which the preloads would delay (+0.3 s on slow 4G), so it is skipped. */ -}}
+{{- if not .IsHome }}
+  {{- range slice "inter/inter-latin-wght-normal" "brand/ibm-plex-mono-latin-400-normal" }}
+<link rel="preload" href="{{ printf "webfonts/%s.woff2" . | relURL }}" as="font" type="font/woff2" crossorigin>
+  {{- end }}
+{{- end }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
 {{- /* Link-preview image details that Hugo's built-in OpenGraph and Twitter
      templates leave out: size, type and alt text. Uses the page's first
