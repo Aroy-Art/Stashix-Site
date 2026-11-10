@@ -1,0 +1,19 @@
+# Cloudflare Pages response headers. Rules that match a path are combined, so
+# keep each header in one rule per path.
+
+/*
+  Strict-Transport-Security: max-age=31536000
+  X-Frame-Options: DENY
+  Content-Security-Policy: frame-ancestors 'none'; base-uri 'self'; object-src 'none'
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+  ! Access-Control-Allow-Origin
+
+# Fingerprinted by Hugo and never rewritten after the build. The /scss/
+# stylesheets are fingerprinted too but scripts/purge-css.mjs rewrites them in
+# place under the same name, so they keep the default caching.
+/js/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/webfonts/*
+  Cache-Control: public, max-age=2592000
