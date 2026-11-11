@@ -64,8 +64,9 @@ version. Downloads are cached for an hour (see `caches` in `hugo.yaml`).
 
 ## Contributing
 
-Corrections and new pages are welcome. Commits must be signed off
-(`git commit -s`) under the
+Corrections and new pages are welcome. For other ways to help with Stashix,
+see [how you can help](https://stashix.net/blog/post/how-to-help/). Commits
+must be signed off (`git commit -s`) under the
 [Developer Certificate of Origin](https://developercertificate.org/).
 
 ## License
