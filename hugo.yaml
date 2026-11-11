@@ -72,6 +72,16 @@ params:
   images: [images/og/stashix.jpg]
   images_alt: Stashix home screen with a continue-reading banner and rows of comic covers
 
+  stashix:
+    # Site-wide notice at the top of every page (layouts/_partials/version-banner.html).
+    # Change `id` when the message changes so readers who dismissed the old
+    # one see the new one; remove the block to hide the notice.
+    notice:
+      id: early-software-1
+      text: '**Stashix is early software.** Expect bugs, and back up your database before upgrading.'
+      link_text: Here's how you can help
+      link: /blog/post/how-to-help/
+
 module:
   imports:
     - path: github.com/pgsty/oink

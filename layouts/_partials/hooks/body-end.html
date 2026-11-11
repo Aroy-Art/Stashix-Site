@@ -10,3 +10,14 @@
   }, 4000);
 }());
 </script>
+<script>
+(function () {
+  document.addEventListener('click', function (event) {
+    var button = event.target.closest('[data-sx-notice-close]');
+    if (!button) return;
+    var notice = button.closest('[data-sx-notice]');
+    notice.hidden = true;
+    try { localStorage.setItem('sx-notice-dismissed', notice.dataset.sxNotice); } catch (e) {}
+  });
+}());
+</script>

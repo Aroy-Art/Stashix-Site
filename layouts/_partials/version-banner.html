@@ -1,0 +1,48 @@
+{{ if .Site.Params.archived_version -}}
+  {{ $latestVersion := "" -}}
+  {{ with .Site.Params.url_latest_version -}}
+    {{/* Site configuration is high-trust input, but it still goes through the
+         shared URL policy: an unsafe value warns and drops the link. */ -}}
+    {{ $validated := partial "content/url.html" (dict
+      "label" "params.url_latest_version" "parameter" "URL"
+      "position" "site configuration" "value" . "kind" "web") -}}
+    {{ if $validated.valid }}{{ $latestVersion = $validated.href }}{{ end -}}
+  {{ end -}}
+  {{ $currentVersion := .Site.Params.version -}}
+  <div class="td-page-notice td-page-notice--primary">
+    {{ with $currentVersion -}}
+      <p>
+        {{ T "version_banner_archived" (dict "Version" (. | markdownify)) | safeHTML }}
+        {{ with $latestVersion -}}
+          {{/* Build the anchor here so translators localize word order without
+               editing markup. htmlEscape, not %q: %q escapes for Go, not for
+               an HTML attribute, so a quote in the URL would break out of it
+               even after the shared URL policy has cleared the scheme/host. */ -}}
+          {{ $link := printf "<a href=\"%s\" target=\"_blank\" rel=\"noopener\">%s</a>" (htmlEscape .) (T "version_banner_latest_link") -}}
+          {{ T "version_banner_latest" (dict "Link" $link) | safeHTML -}}
+        {{ end -}}
+      </p>
+    {{ end -}}
+  </div>
+{{ end -}}
+{{- /* Stashix: site-wide notice from params.stashix.notice (see hugo.yaml).
+     The theme renders this partial at the top of the content on every
+     layout, which keeps the notice clear of the fixed docs sidebar. The
+     inline script hides a dismissed notice while the page is still parsing,
+     so it never flashes; body-end.html wires up the dismiss button. */ -}}
+{{ with .Site.Params.stashix.notice -}}
+{{ $here := eq $.RelPermalink (.link | relURL) -}}
+<div class="sx-notice-wrap d-print-none" data-sx-notice="{{ .id }}">
+  <div class="sx-notice" role="note">
+    <i class="fa-solid fa-flask sx-notice__icon" aria-hidden="true"></i>
+    <p class="sx-notice__text">
+      {{ .text | markdownify }}
+      {{- if and .link (not $here) }} <a href="{{ .link | relURL }}">{{ .link_text }} <span aria-hidden="true">&rarr;</span></a>{{ end }}
+    </p>
+    <button type="button" class="sx-notice__close" data-sx-notice-close aria-label="Dismiss notice" title="Dismiss">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+  </div>
+</div>
+<script>try{var n=document.currentScript.previousElementSibling;if(localStorage.getItem('sx-notice-dismissed')===n.dataset.sxNotice)n.hidden=true}catch(e){}</script>
+{{ end -}}

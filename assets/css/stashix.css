@@ -576,3 +576,52 @@
 [data-td-preset='ink'] .td-callout {
   border-color: var(--td-callout-accent);
 }
+
+/* ── Site notice (layouts/_partials/version-banner.html) ──────────────────── */
+/* One line in a violet-tinted frame at the top of the content. The wrapper
+   carries no display rule, so the `hidden` attribute set on dismiss works. */
+.sx-notice {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 1280px;
+  margin: 1rem auto;
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+  border: 1px solid var(--td-brand-copper-dim);
+  border-radius: 10px;
+  background: color-mix(in oklch, var(--td-brand-copper) 10%, transparent);
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+.td-main > .sx-notice-wrap .sx-notice {
+  margin-inline: max(16px, calc((100% - 1280px) / 2 + 28px));
+}
+.sx-notice__icon {
+  flex-shrink: 0;
+  color: var(--bs-link-hover-color);
+}
+.sx-notice__text {
+  flex: 1;
+  margin: 0;
+}
+.sx-notice__text a {
+  font-weight: 600;
+  color: var(--bs-link-hover-color);
+  white-space: nowrap;
+}
+.sx-notice__close {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--bs-secondary-color);
+}
+.sx-notice__close:hover {
+  background: color-mix(in oklch, var(--td-brand-copper) 15%, transparent);
+  color: var(--bs-emphasis-color);
+}
