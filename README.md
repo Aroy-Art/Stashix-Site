@@ -1,7 +1,7 @@
 <h1 align="center">
-  <img src="assets/icons/logo.svg" alt="" height="96">
+  <img src="assets/icons/logo.svg" alt="" height="72">
   <br>
-  <img src="assets/icons/wordmark.svg" alt="Stashix" height="64">
+  <img src="assets/icons/wordmark.svg" alt="Stashix" height="88">
 </h1>
 
 Source for [stashix.net](https://stashix.net/): the documentation, guides and
