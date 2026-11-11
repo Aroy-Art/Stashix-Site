@@ -596,6 +596,16 @@
 .td-main > .sx-notice-wrap .sx-notice {
   margin-inline: max(16px, calc((100% - 1280px) / 2 + 28px));
 }
+/* On the home page the notice sits right above the hero: share its
+   background, and pad the strip instead of using margins, so no band of
+   page background shows between the notice and the hero. */
+.td-home .td-main > .sx-notice-wrap {
+  padding-block: 1rem 0;
+  background-color: var(--bs-secondary-bg);
+}
+.td-home .td-main > .sx-notice-wrap .sx-notice {
+  margin-block: 0;
+}
 .sx-notice__icon {
   flex-shrink: 0;
   color: var(--bs-link-hover-color);
