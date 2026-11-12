@@ -38,7 +38,7 @@ Stashix walks the library root recursively and lists every file whose extension 
 Each new or modified file is parsed concurrently (up to 16 at a time). Parsing extracts:
 
 - Embedded `MetronInfo.xml` or `ComicInfo.xml` from ZIP/RAR/7z archives
-- A sidecar `<filename>.xml` placed next to the file (takes highest precedence)
+- Sidecars `<filename>.MetronInfo.xml` and `<filename>.ComicInfo.xml` placed next to the file (take highest precedence; an older single `<filename>.xml` is still read)
 - PDF info-dict fields (title, author, creation date) for `.pdf` files
 - Filename heuristics for anything not covered by embedded metadata
 
@@ -77,9 +77,19 @@ Series with no remaining books are also soft-deleted.
 
 ## Folder watching
 
-Stashix watches your library folders for filesystem events using the OS native API (inotify on Linux, FSEvents on macOS). When a supported file or its sidecar is created, modified, or moved into a watched folder, the scanner queues a single-file scan after a **5-second debounce** — rapid saves (e.g. a download in progress) do not trigger repeated scans.
+Stashix watches your library folders for filesystem events using the OS native API (inotify on Linux, FSEvents on macOS). When a supported file or one of its sidecars (cover image or metadata XML) is created, modified, or moved into a watched folder, the scanner queues a single-file scan after a **5-second debounce** — rapid saves (e.g. a download in progress) do not trigger repeated scans.
+
+Stashix chooses which folders to watch when it starts. After you add a library, restart Stashix to watch it; until then, run **Scan** on the library to pick up new files.
+
+Deleting a file, or moving it out of a library, is not picked up live. The next full scan finds it during [orphan detection](#orphan-detection).
 
 Events for files Stashix itself just wrote (metadata write-back) are suppressed for 30 seconds to avoid re-importing its own output.
+
+### If live watching is off
+
+If the watcher can't start, Stashix keeps running without it and **Admin → Libraries** shows **Live file watching is off** with the reason. New and changed files then appear only after you run **Scan** on a library.
+
+On Linux the watcher needs `inotify-tools`. The Docker image includes it from version 0.0.2; if you see this notice on an older image, [update Stashix](/docs/get-started/installation/#update).
 
 ---
 

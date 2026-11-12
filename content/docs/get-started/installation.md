@@ -137,7 +137,7 @@ Run `docker compose up -d`, then add `/libraries/manga` as a library.
 
 By default Stashix saves metadata you edit or match back to your files: CBZ
 files get a `MetronInfo.xml` inside the archive, and other formats get a
-`<book name>.xml` file next to them. Your edits then travel with the files and
+`<book name>.MetronInfo.xml` file next to them. Your edits then travel with the files and
 survive a database reset.
 
 To keep your library untouched, mount it read-only:

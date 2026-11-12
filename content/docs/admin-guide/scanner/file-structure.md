@@ -114,7 +114,7 @@ A library that combines all of the above: publisher folders, ongoing and finishe
 
 Within a single file, Stashix merges metadata from multiple sources. The order of precedence, highest first:
 
-1. **Sidecar XML** — `<filename>.xml` next to the file (MetronInfo or ComicInfo format)
+1. **Sidecar XML** — `<filename>.MetronInfo.xml` or `<filename>.ComicInfo.xml` next to the file (an older single `<filename>.xml` in either format is still read)
 2. **Embedded MetronInfo.xml** — inside the archive
 3. **Embedded ComicInfo.xml** — inside the archive (or the PDF info-dict for `.pdf`)
 4. **Filename parsing** — series name, issue number, volume, year
@@ -149,4 +149,4 @@ Noise tags — `(Digital)`, `(HQ)`, `(Webrip)`, `(c2c)`, `(Retail)`, `(FIXED)`, 
 
 **Do not** nest series inside each other more than one level below the library root unless you use the publisher pattern. Deep nesting is supported by the recursive walker but only one folder level above the file becomes the series.
 
-**Do** use a sidecar XML (`Batman 001.xml`) when you want reliable metadata that overrides filename guesses. The `ComicInfo.xml` or `MetronInfo.xml` format is both accepted.
+**Do** use a sidecar XML (`Batman 001.MetronInfo.xml` or `Batman 001.ComicInfo.xml`) when you want reliable metadata that overrides filename guesses.
