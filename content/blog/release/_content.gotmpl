@@ -81,6 +81,8 @@
     "sitemap" $sitemap
   -}}
   {{- with $summary }}{{ $page = merge $page (dict "summary" .) }}{{ end -}}
-  {{- if $released }}{{ $page = merge $page (dict "date" $when) }}{{ end -}}
+  {{- /* AddPage reads dates from a `dates` map; a top-level `date` key is
+         silently ignored and leaves the page undated. */ -}}
+  {{- if $released }}{{ $page = merge $page (dict "dates" (dict "date" (time.AsTime $when))) }}{{ end -}}
   {{- $.AddPage $page -}}
 {{- end -}}
