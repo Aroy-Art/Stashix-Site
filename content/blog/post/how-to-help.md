@@ -1,7 +1,7 @@
 ---
 title: Stashix is early. Here's how you can help
 linkTitle: How you can help
-description: Stashix is early software. What that means if you run it today, and how you can help by testing, reporting bugs, improving the docs or contributing code.
+description: Stashix is early software. What that means if you run it today, and how you can help by testing, reporting bugs, improving the docs, translating or contributing code.
 date: 2026-11-11
 tags: [announcement, contributing]
 categories: [news]
@@ -45,7 +45,7 @@ the wrong issue are all worth reporting, even if you're not sure it's a bug.
 
 Tell us what's missing. The [roadmap](https://github.com/aroy-art/stashix#todo)
 lists what's planned, including more formats, more metadata sources, reading
-lists and translation of the interface. Feature requests help decide what
+lists and localized dates and numbers. Feature requests help decide what
 comes first.
 
 ### Improve the documentation {#docs}
@@ -53,6 +53,14 @@ comes first.
 If a guide was unclear or a step was missing, fix it. Every docs page has an
 **Edit this page** link that opens its source on GitHub, where you can propose
 a change as a pull request.
+
+### Translate the interface {#translate}
+
+Stashix is translated on
+[Hosted Weblate](https://hosted.weblate.org/engage/stashix/), in the browser:
+sign in, pick your language or start a new one, and translate. No Git or
+Elixir needed. The [contributing guide](/docs/contributing/#translate) has the
+details.
 
 ### Work on the code {#code}
 

@@ -1,6 +1,6 @@
 ---
 title: Contributing
-description: How to help with Stashix. Report bugs, suggest features, improve the documentation, work on the code, or report a security issue privately.
+description: How to help with Stashix. Report bugs, suggest features, improve the documentation, translate the interface, work on the code, or report a security issue privately.
 weight: 50
 icon: fa-solid fa-handshake-angle
 menus:
@@ -25,6 +25,7 @@ a short overview, read [how you can help](/blog/post/how-to-help/).
 | Tell us something is broken         | [Report a bug](#issues)                 |
 | Ask for something new               | [Suggest a feature](#features)          |
 | Fix a typo or an unclear guide      | [Improve the documentation](#docs)      |
+| Use Stashix in your own language    | [Translate Stashix](#translate)         |
 | Fix a bug or build a feature        | [Work on the code](#code)               |
 | Report a vulnerability              | [Reporting security issues](security/)  |
 
@@ -63,7 +64,7 @@ design.
 
 Check the [roadmap](https://github.com/aroy-art/stashix#todo) first: it lists
 what's already planned, such as more formats, more metadata sources, reading
-lists, and translation and localization of the interface. If your idea is on
+lists, and localized dates and numbers. If your idea is on
 it, a comment on why you need it helps decide what comes first.
 
 ## Improve the documentation {#docs}
@@ -85,6 +86,50 @@ make serve   # http://localhost:1313/
 
 Pages are Markdown under `content/docs/`. Keep sentences short, write for
 someone running Stashix for the first time, and test any command you add.
+
+## Translate Stashix {#translate}
+
+[![Translation status](https://hosted.weblate.org/widget/stashix/multi-auto.svg)](https://hosted.weblate.org/engage/stashix/)
+
+Translations are done on
+[Hosted Weblate](https://hosted.weblate.org/engage/stashix/), in the browser.
+You don't need Git, Elixir or a running Stashix.
+
+1. **Sign in** to Hosted Weblate. You can make an account there, or log in
+   with GitHub or GitLab.
+2. **Pick a language** on the
+   [Stashix project](https://hosted.weblate.org/projects/stashix/). If yours
+   isn't listed, choose **Start new translation** to add it.
+3. **Translate.** Weblate shows each English string with its context and
+   suggestions. Strings marked **Needs editing** have a rough draft; check and
+   fix them.
+
+A few rules keep the interface working:
+
+- **Keep placeholders as they are.** `%{count}`, `%{name}` and the like are
+  filled in by Stashix; move them where your language needs them, but don't
+  translate or drop them. Weblate warns you if one goes missing.
+- **Fill in every plural form.** Strings such as "1 book / %{count} books"
+  have one field per plural form of your language.
+- **Match the tone.** The English text is short and plain; aim for the same.
+
+### How translations reach Stashix {#translate-flow}
+
+Weblate collects your changes and commits them to the `translations` branch
+of the repository, with your name on them and signed off under the
+[Developer Certificate of Origin](https://developercertificate.org/). They
+reach `main` through a pull request, and ship with the next release. A new
+language appears in Stashix's language setting once enough of it is done.
+
+Found a mistake or something unclear in the English text itself? Leave a
+comment on the string in Weblate, or
+[open an issue](https://github.com/aroy-art/stashix/issues/new/choose).
+
+> [!NOTE]
+> If you work on the code, don't edit translated `.po` files in a pull
+> request; that clashes with Weblate. After adding or changing interface text,
+> run `mix gettext.extract --merge` in `stashix_web/` and commit the `.pot`
+> file and the `en` files.
 
 ## Work on the code {#code}
 
