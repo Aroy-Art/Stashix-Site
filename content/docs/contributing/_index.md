@@ -115,11 +115,10 @@ A few rules keep the interface working:
 
 ### How translations reach Stashix {#translate-flow}
 
-Weblate collects your changes and commits them to the `translations` branch
-of the repository, with your name on them and signed off under the
-[Developer Certificate of Origin](https://developercertificate.org/). They
-reach `main` through a pull request, and ship with the next release. A new
-language appears in Stashix's language setting once enough of it is done.
+Weblate collects your changes and commits them, with your name on them, to
+the `translations` branch of the repository. From there they're merged into
+`main` and ship with the next release. A new language appears in Stashix's
+language setting once enough of it is done.
 
 Found a mistake or something unclear in the English text itself? Leave a
 comment on the string in Weblate, or
